@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/timer.dart';
+import '../../domain/usecases/clear_notification.dart';
 import '../../domain/usecases/show_notification.dart';
 
 part 'timer_cubit.freezed.dart';
@@ -14,12 +15,14 @@ class TimerCubit extends Cubit<TimerState> {
   TimerCubit({
     required this.timer,
     required this.showNotification,
+    required this.clearNotification,
   }) : super(TimerState(
           duration: timer.duration,
           remainingSeconds: timer.duration.inSeconds,
         ));
   final CustomTimer timer;
   final ShowNotification showNotification;
+  final ClearNotification clearNotification;
 
   /// Starts the timer.
   void startTimer() async {
@@ -49,6 +52,7 @@ class TimerCubit extends Cubit<TimerState> {
       timer: null,
       remainingSeconds: state.duration.inSeconds,
     ));
+    clearNotification(timer);
   }
 
   /// Decrements the remaining seconds by one.

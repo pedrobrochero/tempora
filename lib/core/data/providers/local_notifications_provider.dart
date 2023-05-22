@@ -5,7 +5,10 @@ abstract class LocalNotificationsProvider {
   static const defaultNotificationChannelName =
       'defaultNotificationChannelName';
 
+  /// Requests permission to show notifications.
   Future<void> requestPermission();
+
+  /// Shows a notification.
   Future<void> showNotification({
     /// Identifier, is duplicated, last notification will replace older
     required int id,
@@ -18,6 +21,10 @@ abstract class LocalNotificationsProvider {
     required String title,
     String? body,
   });
+
+  /// Clears a notification.
+  Future<void> clear(int id);
+
   Future<void> clearAll();
 }
 
@@ -73,5 +80,10 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
+  }
+
+  @override
+  Future<void> clear(int id) async {
+    (await plugin).cancel(id);
   }
 }

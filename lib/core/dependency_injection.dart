@@ -6,6 +6,7 @@ import '../features/timer/data/datasources/timers_local_data_source.dart';
 import '../features/timer/data/repositories/timers_repository_impl.dart';
 import '../features/timer/domain/entities/timer.dart';
 import '../features/timer/domain/repositories/timers_repository.dart';
+import '../features/timer/domain/usecases/clear_notification.dart';
 import '../features/timer/domain/usecases/get_timers.dart';
 import '../features/timer/domain/usecases/show_notification.dart';
 import '../features/timer/presentation/cubit/timer_cubit.dart';
@@ -26,10 +27,12 @@ Future<void> initDI() async {
       (timer, _) => TimerCubit(
             timer: timer,
             showNotification: sl(),
+            clearNotification: sl(),
           ));
   // Usecases
   sl.registerLazySingleton(() => GetTimers(repository: sl()));
   sl.registerLazySingleton(() => ShowNotification(notificationsProvider: sl()));
+  sl.registerLazySingleton(() => ClearNotification(provider: sl()));
   // Repos
   sl.registerLazySingleton<TimersRepository>(
     () => TimersRepositoryImpl(sl()),
