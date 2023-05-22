@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactDeveloper":
             MessageLookupByLibrary.simpleMessage("Contacta al desarrollador"),
         "copyright": m0,
+        "deleteTimerQuestion": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this timer?"),
         "email": MessageLookupByLibrary.simpleMessage("Correo"),
         "emailToDeveloperBody": MessageLookupByLibrary.simpleMessage(
             "Hola, me gustaría comentar algo acerca de la app: "),

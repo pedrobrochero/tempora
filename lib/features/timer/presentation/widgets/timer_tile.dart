@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/dependency_injection.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
+import '../../../../core/presentation/widgets/confirm_dialog_component.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/timer.dart';
 import '../cubit/timer_cubit.dart';
+import '../cubit/timer_list_cubit.dart';
 
 /// A [Widget] that displays a timer.
 class TimerTile extends StatelessWidget {
@@ -31,34 +34,45 @@ class TimerTile extends StatelessWidget {
                   width: 2),
             ),
             child: ListTile(
-                title: Text(
-                  timer.name,
-                  style: context.textTheme.labelSmall,
+              title: Text(
+                timer.name,
+                style: context.textTheme.labelSmall,
+              ),
+              subtitle: BlocSelector<TimerCubit, TimerState, String>(
+                selector: (state) => state.clockTime,
+                builder: (context, state) => Text(
+                  state,
+                  style: context.textTheme.displaySmall,
                 ),
-                subtitle: BlocSelector<TimerCubit, TimerState, String>(
-                  selector: (state) => state.clockTime,
-                  builder: (context, state) => Text(
-                    state,
-                    style: context.textTheme.displaySmall,
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Builder(
+                      builder: (context) => IconButton(
+                            onPressed: () {
+                              context.read<TimerCubit>().resetTimer();
+                            },
+                            icon: const Icon(Icons.replay),
+                          )),
+                  BlocSelector<TimerCubit, TimerState, bool>(
+                    selector: (state) => state.isRunning,
+                    builder: (context, state) =>
+                        state ? const StopButton() : const StartButton(),
                   ),
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Builder(
-                        builder: (context) => IconButton(
-                              onPressed: () {
-                                context.read<TimerCubit>().resetTimer();
-                              },
-                              icon: const Icon(Icons.replay),
-                            )),
-                    BlocSelector<TimerCubit, TimerState, bool>(
-                      selector: (state) => state.isRunning,
-                      builder: (context, state) =>
-                          state ? const StopButton() : const StartButton(),
-                    ),
-                  ],
-                )),
+                ],
+              ),
+              onLongPress: () async {
+                final result = await showConfirmDialog(
+                  context: context,
+                  message: S.of(context).deleteTimerQuestion,
+                  isDestructive: true,
+                );
+                if (result ?? false) {
+                  context.read<TimerListCubit>().deleteTimerAction(timer.id);
+                }
+              },
+            ),
           ),
         ),
       );

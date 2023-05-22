@@ -45,4 +45,15 @@ class TimersRepositoryImpl implements TimersRepository {
       return Left(UnknownFailure(e));
     }
   }
+
+  /// Deletes a [CustomTimer] from the database.
+  @override
+  Future<Either<Failure, void>> deleteTimer(String id) async {
+    try {
+      await localDataSource.deleteTimer(id);
+      return const Right(null);
+    } catch (e) {
+      return Left(UnknownFailure(e));
+    }
+  }
 }

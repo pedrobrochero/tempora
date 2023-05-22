@@ -2,6 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../../../generated/l10n.dart';
 
+/// Shows a dialog to confirm an action.
+///
+/// Returns `true` if the user confirms, `false` if the user cancels.
+Future<bool?> showConfirmDialog({
+  required BuildContext context,
+  required String message,
+  String? confirmLabel,
+  String? cancelLabel,
+  bool isDestructive = false,
+}) =>
+    showDialog<bool>(
+      context: context,
+      builder: (context) => ConfirmDialogComponent(
+        message: message,
+        confirmLabel: confirmLabel,
+        cancelLabel: cancelLabel,
+        isDestructive: isDestructive,
+      ),
+    );
+
 class ConfirmDialogComponent extends StatelessWidget {
   const ConfirmDialogComponent({
     required this.message,
@@ -31,7 +51,7 @@ class ConfirmDialogComponent extends StatelessWidget {
               style: isDestructive
                   ? Theme.of(context)
                       .textTheme
-                      .bodyLarge
+                      .bodyMedium
                       ?.copyWith(color: Colors.red)
                   : null,
             ),

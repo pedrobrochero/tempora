@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/control_classes/usecase.dart';
 import '../../domain/entities/timer.dart';
 import '../../domain/usecases/create_timer.dart';
+import '../../domain/usecases/delete_timer.dart';
 import '../../domain/usecases/get_timers.dart';
 
 part 'timer_list_cubit.freezed.dart';
@@ -14,13 +15,22 @@ class TimerListCubit extends Cubit<TimerListState> {
   TimerListCubit({
     required this.getTimers,
     required this.createTimer,
+    required this.deleteTimer,
   }) : super(const TimerListState()) {
     getInitialData();
   }
 
+  /// A use case to get a list of timers.
+  @visibleForTesting
   final GetTimers getTimers;
 
+  /// A use case to create a timer.
+  @visibleForTesting
   final CreateTimer createTimer;
+
+  /// A use case to delete a timer.
+  @visibleForTesting
+  final DeleteTimer deleteTimer;
 
   void getInitialData() async {
     (await getTimers(const NoParams())).fold(
@@ -33,6 +43,21 @@ class TimerListCubit extends Cubit<TimerListState> {
     (await createTimer(params)).fold(
       (failure) => emit(state.copyWith()),
       (_) => getInitialData(),
+    );
+  }
+
+  void deleteTimerAction(String id) async {
+    final either = await deleteTimer(id);
+    print(either);
+    either.fold(
+      (failure) {
+        print('Timer not deleted');
+        emit(state.copyWith());
+      },
+      (_) {
+        print('Timer deleted');
+        getInitialData();
+      },
     );
   }
 }

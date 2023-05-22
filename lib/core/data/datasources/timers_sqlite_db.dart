@@ -21,14 +21,14 @@ class TimersSqliteProvider extends SqliteProvider {
 }
 
 class TimersTable {
-  static const name = 'timers';
-  static const colId = 'id';
-  static const colName = 'name';
-  static const colDuration = 'duration';
+  static const tableName = 'timers';
+  static const id = 'id';
+  static const name = 'name';
+  static const duration = 'duration';
 
-  static const _creationQuery = 'CREATE TABLE $name( '
-      '$colId TEXT NOT NULL PRIMARY KEY, '
-      '$colName TEXT NOT NULL, '
-      '$colDuration INTEGER NOT NULL '
+  static const _creationQuery = 'CREATE TABLE $tableName( '
+      '$id TEXT NOT NULL PRIMARY KEY, '
+      '$name TEXT NOT NULL, '
+      '$duration INTEGER NOT NULL '
       ')';
 }

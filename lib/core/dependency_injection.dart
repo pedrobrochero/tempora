@@ -8,6 +8,7 @@ import '../features/timer/domain/entities/timer.dart';
 import '../features/timer/domain/repositories/timers_repository.dart';
 import '../features/timer/domain/usecases/clear_notification.dart';
 import '../features/timer/domain/usecases/create_timer.dart';
+import '../features/timer/domain/usecases/delete_timer.dart';
 import '../features/timer/domain/usecases/get_timers.dart';
 import '../features/timer/domain/usecases/show_notification.dart';
 import '../features/timer/presentation/cubit/timer_cubit.dart';
@@ -27,6 +28,7 @@ Future<void> initDI() async {
   sl.registerFactory(() => TimerListCubit(
         getTimers: sl(),
         createTimer: sl(),
+        deleteTimer: sl(),
       ));
   sl.registerFactoryParam<TimerCubit, CustomTimer, dynamic>(
       (timer, _) => TimerCubit(
@@ -39,6 +41,7 @@ Future<void> initDI() async {
   sl.registerLazySingleton(() => ShowNotification(notificationsProvider: sl()));
   sl.registerLazySingleton(() => ClearNotification(provider: sl()));
   sl.registerLazySingleton(() => CreateTimer(repository: sl()));
+  sl.registerLazySingleton(() => DeleteTimer(repository: sl()));
   // Repos
   sl.registerLazySingleton<TimersRepository>(
     () => TimersRepositoryImpl(sl()),

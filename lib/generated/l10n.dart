@@ -309,6 +309,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to delete this timer?`
+  String get deleteTimerQuestion {
+    return Intl.message(
+      'Are you sure you want to delete this timer?',
+      name: 'deleteTimerQuestion',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -21,8 +21,10 @@ class TimerListPage extends StatelessWidget {
               final timers = state.timers;
               return ListView.builder(
                 itemCount: timers.length,
-                itemBuilder: (context, index) =>
-                    TimerTile(timer: timers[index]),
+                itemBuilder: (context, index) => TimerTile(
+                  timer: timers[index],
+                  key: Key(timers[index].id),
+                ),
               );
             },
           ),
