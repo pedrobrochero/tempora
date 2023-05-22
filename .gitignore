@@ -45,3 +45,4 @@ app.*.map.json
 
 # Custom ignore entries
 .fvm
+.vscode/launch.json
