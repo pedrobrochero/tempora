@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/dependency_injection.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
 import '../../domain/entities/timer.dart';
 import '../cubit/timer_cubit.dart';
@@ -16,7 +17,7 @@ class TimerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) => TimerCubit(timer),
+        create: (context) => sl<TimerCubit>(param1: timer),
         child: BlocBuilder<TimerCubit, TimerState>(
           builder: (context, state) => Container(
             margin: const EdgeInsets.all(8),

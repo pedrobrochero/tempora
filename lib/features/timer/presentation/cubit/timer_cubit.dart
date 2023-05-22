@@ -4,20 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/timer.dart';
+import '../../domain/usecases/show_notification.dart';
 
 part 'timer_cubit.freezed.dart';
 part 'timer_state.dart';
 
 /// A [Cubit] that manages the state of a timer.
 class TimerCubit extends Cubit<TimerState> {
-  TimerCubit(CustomTimer timer)
-      : super(TimerState(
+  TimerCubit({
+    required this.timer,
+    required this.showNotification,
+  }) : super(TimerState(
           duration: timer.duration,
           remainingSeconds: timer.duration.inSeconds,
         ));
+  final CustomTimer timer;
+  final ShowNotification showNotification;
 
   /// Starts the timer.
-  void startTimer() {
+  void startTimer() async {
     emit(
       state.copyWith(
         timer: Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -55,7 +60,9 @@ class TimerCubit extends Cubit<TimerState> {
     }
   }
 
-  void onTimerFinished() {}
+  void onTimerFinished() {
+    showNotification(timer);
+  }
 
   @override
   Future<void> close() {

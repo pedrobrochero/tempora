@@ -12,10 +12,22 @@ class TimerState with _$TimerState {
   const TimerState._();
 
   /// Returns true if the timer is running.
-  bool get isRunning => timer != null;
+  bool get isRunning => status == TimerStatus.running;
 
   /// Returns true if the timer has finished.
-  bool get isFinished => remainingSeconds <= 0;
+  bool get isFinished => status == TimerStatus.finished;
+
+  TimerStatus get status {
+    if (remainingSeconds <= 0) {
+      return TimerStatus.finished;
+    } else if (timer != null) {
+      return TimerStatus.running;
+    } else if (remainingSeconds == duration.inSeconds) {
+      return TimerStatus.initial;
+    } else {
+      return TimerStatus.paused;
+    }
+  }
 
   /// Returns the remaining minutes as a string.
   String remainingMinutesString(int seconds) =>
@@ -32,4 +44,11 @@ class TimerState with _$TimerState {
     return s += '${remainingMinutesString(remainingSeconds.abs())}:'
         '${remainingSecondsInMinuteString(remainingSeconds.abs())}';
   }
+}
+
+enum TimerStatus {
+  initial,
+  running,
+  paused,
+  finished,
 }
