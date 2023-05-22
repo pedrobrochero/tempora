@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'core/dependency_injection.dart';
 import 'core/presentation/utils/theme.dart';
 import 'core/routing/app_router.dart';
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
+  await initDI();
   runApp(const MyApp());
 }
 

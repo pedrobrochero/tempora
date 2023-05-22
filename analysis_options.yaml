@@ -198,6 +198,10 @@ linter:
     use_raw_strings: false
     
 analyzer:
+  language:
+    # strict-casts: true
+    # strict-inference: true
+    # strict-raw-types: true
   exclude:
     - lib/**/*.freezed.dart
     - lib/**/*.g.dart
