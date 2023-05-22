@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224468881748",
+    "project_id": "tempora-9f5b9",
+    "storage_bucket": "tempora-9f5b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224468881748:android:fe4087a467a64ca85ab8c1",
+        "android_client_info": {
+          "package_name": "com.evolucionass.tempora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224468881748-vbjn2leqt7sslu2bbi8cqf531gr4ae7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiKEZMIfmuwgK4wOb3W2ynxBIqP_xsP3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224468881748-vbjn2leqt7sslu2bbi8cqf531gr4ae7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
