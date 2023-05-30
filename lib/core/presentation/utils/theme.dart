@@ -60,7 +60,7 @@ ThemeData get appTheme {
     // Input
     inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(48),
+        borderRadius: BorderRadius.circular(16),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       // hintStyle: subtitle2.copyWith(color: Colors.grey.shade600),
@@ -68,20 +68,17 @@ ThemeData get appTheme {
     // Elevated button
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     )),
     // Outlined button
     outlinedButtonTheme: OutlinedButtonThemeData(
         style: ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     )),
-    // Fab
-    floatingActionButtonTheme:
-        themeData.floatingActionButtonTheme.copyWith(backgroundColor: _primary),
     // Card
     cardTheme: themeData.cardTheme.copyWith(
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
   );
 }

@@ -48,14 +48,11 @@ class TimerListCubit extends Cubit<TimerListState> {
 
   void deleteTimerAction(String id) async {
     final either = await deleteTimer(id);
-    print(either);
     either.fold(
       (failure) {
-        print('Timer not deleted');
         emit(state.copyWith());
       },
       (_) {
-        print('Timer deleted');
         getInitialData();
       },
     );
