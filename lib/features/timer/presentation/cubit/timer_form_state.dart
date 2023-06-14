@@ -17,6 +17,5 @@ class TimerFormState with _$TimerFormState {
   bool get isValid =>
       nameError == null &&
       durationError == null &&
-      minutes != '00' &&
-      seconds != '00';
+      (minutes != '00' || seconds != '00');
 }

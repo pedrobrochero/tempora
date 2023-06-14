@@ -41,12 +41,12 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
         AndroidInitializationSettings('@mipmap/ic_launcher');
     // Ios settings
     const initializationSettingsIOS = DarwinInitializationSettings();
-    const initializationSettings = InitializationSettings(
+
+    _plugin = FlutterLocalNotificationsPlugin();
+    await _plugin!.initialize(const InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
-    );
-    _plugin = FlutterLocalNotificationsPlugin();
-    await _plugin!.initialize(initializationSettings);
+    ));
     return _plugin!;
   }
 
@@ -65,6 +65,11 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
         android: AndroidNotificationDetails(
       androidChannelId,
       androidChannelName,
+      sound: const RawResourceAndroidNotificationSound(
+          'islandy_loop_925bpm_132431'),
+      fullScreenIntent: true,
+      visibility: NotificationVisibility.public,
+      priority: Priority.max,
     ));
     await (await plugin).show(
       id,

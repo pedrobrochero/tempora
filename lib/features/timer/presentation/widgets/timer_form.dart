@@ -50,6 +50,7 @@ class TimerForm extends StatelessWidget {
                             ),
                             autofocus: true,
                             textInputAction: TextInputAction.next,
+                            textCapitalization: TextCapitalization.sentences,
                             onChanged: context.read<TimerFormCubit>().setName,
                           ),
                           const SizedBox(height: 16),
