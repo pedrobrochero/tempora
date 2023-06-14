@@ -5,6 +5,7 @@ import '../../../../core/dependency_injection.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
 import '../../../../core/presentation/widgets/confirm_dialog_component.dart';
 import '../../../../generated/l10n.dart';
+import '../../../foreground_service/presentation/cubit/foreground_service_cubit.dart';
 import '../../domain/entities/timer.dart';
 import '../cubit/timer_cubit.dart';
 import '../cubit/timer_list_cubit.dart';
@@ -48,17 +49,11 @@ class TimerTile extends StatelessWidget {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Builder(
-                      builder: (context) => IconButton(
-                            onPressed: () {
-                              context.read<TimerCubit>().resetTimer();
-                            },
-                            icon: const Icon(Icons.replay),
-                          )),
+                  _ResetButton(timer),
                   BlocSelector<TimerCubit, TimerState, bool>(
                     selector: (state) => state.isRunning,
                     builder: (context, state) =>
-                        state ? const StopButton() : const StartButton(),
+                        state ? _StopButton(timer) : _StartButton(timer),
                   ),
                 ],
               ),
@@ -78,29 +73,44 @@ class TimerTile extends StatelessWidget {
       );
 }
 
-class StartButton extends StatelessWidget {
-  const StartButton({
-    super.key,
-  });
+class _ResetButton extends StatelessWidget {
+  const _ResetButton(this.timer);
+
+  final CustomTimer timer;
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+        onPressed: () {
+          context.read<TimerCubit>().resetTimer();
+          context.read<ForegroundServiceCubit>().removeTimer(timer);
+        },
+        icon: const Icon(Icons.replay),
+      );
+}
+
+class _StartButton extends StatelessWidget {
+  const _StartButton(this.timer);
+  final CustomTimer timer;
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
         onPressed: () {
           context.read<TimerCubit>().startTimer();
+          context.read<ForegroundServiceCubit>().addTimer(timer);
         },
         child: const Icon(Icons.play_arrow),
       );
 }
 
-class StopButton extends StatelessWidget {
-  const StopButton({
-    super.key,
-  });
+class _StopButton extends StatelessWidget {
+  const _StopButton(this.timer);
+  final CustomTimer timer;
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
         onPressed: () {
           context.read<TimerCubit>().pauseTimer();
+          context.read<ForegroundServiceCubit>().removeTimer(timer);
         },
         child: BlocSelector<TimerCubit, TimerState, bool>(
           selector: (state) => state.isFinished,

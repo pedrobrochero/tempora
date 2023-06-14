@@ -2,6 +2,7 @@
 
 import 'package:get_it/get_it.dart';
 
+import '../features/foreground_service/presentation/cubit/foreground_service_cubit.dart';
 import '../features/timer/data/datasources/timers_local_data_source.dart';
 import '../features/timer/data/repositories/timers_repository_impl.dart';
 import '../features/timer/domain/entities/timer.dart';
@@ -49,6 +50,13 @@ Future<void> initDI() async {
   // Data sources
   sl.registerLazySingleton<TimersLocalDataSource>(
       () => TimersLocalDataSourceImpl(sl()));
+
+  //! Feature: Foreground service
+  // Bloc
+  sl.registerLazySingleton(() => ForegroundServiceCubit());
+  // Usecases
+  // Repos
+  // Data sources
 
   //! Plugin interfaces AKA providers
   sl.registerLazySingleton<LocalNotificationsProvider>(
