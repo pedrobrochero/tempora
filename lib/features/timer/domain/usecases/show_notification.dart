@@ -20,11 +20,9 @@ class ShowNotification implements UseCase<void, CustomTimer> {
       await notificationsProvider.requestPermission();
       await notificationsProvider.showNotification(
         id: timer.id.hashCode,
-        androidChannelId:
-            LocalNotificationsProvider.defaultNotificationChannelId,
-        androidChannelName:
-            LocalNotificationsProvider.defaultNotificationChannelName,
-        title: '${timer.name} ended',
+        androidChannelId: LocalNotificationsProvider.timerEndedChannel,
+        androidChannelName: LocalNotificationsProvider.timerEndedChannel,
+        title: '${timer.name.isNotEmpty ? timer.name : 'Timer'} ended',
       );
       return const Right(null);
     } catch (e) {

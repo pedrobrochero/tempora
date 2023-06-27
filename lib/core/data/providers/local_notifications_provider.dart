@@ -1,9 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 abstract class LocalNotificationsProvider {
-  static const defaultNotificationChannelId = 'defaultNotificationChannelId';
-  static const defaultNotificationChannelName =
-      'defaultNotificationChannelName';
+  static const timerEndedChannel = 'TimerEnded';
 
   /// Requests permission to show notifications.
   Future<void> requestPermission();
