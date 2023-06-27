@@ -26,7 +26,7 @@ Future<void> initDI() async {
 
   //! Feature: Timers
   // Bloc
-  sl.registerFactory(() => TimerListCubit(
+  sl.registerLazySingleton(() => TimerListCubit(
         getTimers: sl(),
         createTimer: sl(),
         deleteTimer: sl(),
