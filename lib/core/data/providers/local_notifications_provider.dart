@@ -68,6 +68,9 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
       fullScreenIntent: true,
       visibility: NotificationVisibility.public,
       priority: Priority.max,
+      importance: Importance.high,
+      audioAttributesUsage: AudioAttributesUsage.alarm,
+      usesChronometer: true,
     ));
     await (await plugin).show(
       id,
