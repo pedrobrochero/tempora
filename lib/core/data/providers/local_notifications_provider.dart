@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../../presentation/utils/theme.dart';
 
 abstract class LocalNotificationsProvider {
   static const timerEndedChannel = 'TimerEnded';
@@ -59,6 +62,13 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
     required String androidChannelName,
     String? body,
   }) async {
+    final vibrationPattern = Int64List(4);
+    vibrationPattern[0] = 0;
+    vibrationPattern[1] = 1000;
+    vibrationPattern[2] = 5000;
+    vibrationPattern[3] = 2000;
+    // TODO(pedrobrochero): Use Int64.fromList().
+
     final notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
       androidChannelId,
@@ -71,6 +81,14 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
       importance: Importance.high,
       audioAttributesUsage: AudioAttributesUsage.alarm,
       usesChronometer: true,
+      additionalFlags: Int32List.fromList(<int>[
+        4, // Insistent flag from https://developer.android.com/reference/android/app/Notification.html#FLAG_INSISTENT
+      ]),
+      vibrationPattern: vibrationPattern,
+      enableLights: true,
+      ledColor: primaryThemeColor,
+      ledOnMs: 1000,
+      ledOffMs: 500,
     ));
     await (await plugin).show(
       id,

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-final Color _primary = Colors.lightGreenAccent.shade700;
+final Color primaryThemeColor = Colors.lightGreenAccent.shade700;
 
 final errorColor = Colors.red.shade700;
 const _secondaryColor = Color(0xFF000B29);
@@ -28,7 +28,7 @@ ThemeData get appTheme {
   // Define themeData only with main colors and text style
   final themeData = ThemeData(
     colorScheme: ColorScheme.dark(
-      primary: _primary,
+      primary: primaryThemeColor,
       error: errorColor,
     ),
     fontFamily: _primaryFont,
