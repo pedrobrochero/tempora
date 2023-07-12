@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/dependency_injection.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
 import '../../../../core/presentation/widgets/confirm_dialog_component.dart';
 import '../../../../generated/l10n.dart';
@@ -13,15 +12,15 @@ import '../cubit/timer_list_cubit.dart';
 /// A [Widget] that displays a timer.
 class TimerTile extends StatelessWidget {
   const TimerTile({
-    required this.timer,
+    required this.cubit,
     super.key,
   });
 
-  final CustomTimer timer;
+  final TimerCubit cubit;
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (context) => sl<TimerCubit>(param1: timer),
+  Widget build(BuildContext context) => BlocProvider.value(
+        value: cubit,
         child: BlocBuilder<TimerCubit, TimerState>(
           builder: (context, state) => Container(
             margin: const EdgeInsets.all(8),
@@ -36,7 +35,7 @@ class TimerTile extends StatelessWidget {
             ),
             child: ListTile(
               title: Text(
-                timer.name,
+                cubit.timer.name,
                 style: context.textTheme.labelSmall,
               ),
               subtitle: BlocSelector<TimerCubit, TimerState, String>(
@@ -49,11 +48,12 @@ class TimerTile extends StatelessWidget {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _ResetButton(timer),
+                  _ResetButton(cubit.timer),
                   BlocSelector<TimerCubit, TimerState, bool>(
                     selector: (state) => state.isRunning,
-                    builder: (context, state) =>
-                        state ? _StopButton(timer) : _StartButton(timer),
+                    builder: (context, state) => state
+                        ? _StopButton(cubit.timer)
+                        : _StartButton(cubit.timer),
                   ),
                 ],
               ),
@@ -64,7 +64,9 @@ class TimerTile extends StatelessWidget {
                   isDestructive: true,
                 );
                 if (result ?? false) {
-                  context.read<TimerListCubit>().deleteTimerAction(timer.id);
+                  context
+                      .read<TimerListCubit>()
+                      .deleteTimerAction(cubit.timer.id);
                 }
               },
             ),

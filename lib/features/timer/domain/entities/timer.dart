@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 /// [CustomTimer] is an entity that represents a timer.
-class CustomTimer {
-  CustomTimer({
+class CustomTimer extends Equatable {
+  const CustomTimer({
     required this.id,
     required this.name,
     required this.duration,
@@ -9,4 +11,7 @@ class CustomTimer {
   final String id;
   final String name;
   final Duration duration;
+
+  @override
+  List<Object?> get props => [id];
 }

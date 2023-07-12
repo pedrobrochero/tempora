@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/dependency_injection.dart';
 import '../../domain/usecases/create_timer.dart';
+import '../cubit/timer_cubit.dart';
 import '../cubit/timer_list_cubit.dart';
 import '../widgets/timer_form.dart';
 import '../widgets/timer_tile.dart';
@@ -12,6 +13,8 @@ import '../widgets/timer_tile.dart';
 class TimerListPage extends StatelessWidget {
   const TimerListPage({Key? key}) : super(key: key);
 
+  // TODO(pedrobrochero): Generate and close blocs from TimerListCubit.
+
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (context) => sl<TimerListCubit>(),
@@ -19,11 +22,13 @@ class TimerListPage extends StatelessWidget {
           body: BlocBuilder<TimerListCubit, TimerListState>(
             builder: (context, state) {
               final timers = state.timers;
+              final blocs =
+                  timers.map((e) => sl<TimerCubit>(param1: e)).toList();
               return ListView.builder(
                 itemCount: timers.length,
                 itemBuilder: (context, index) => TimerTile(
-                  timer: timers[index],
-                  key: Key(timers[index].id),
+                  cubit: blocs[index],
+                  key: ValueKey(timers),
                 ),
               );
             },
