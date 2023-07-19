@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 
 part 'custom_timer_model.g.dart';
 
 @JsonSerializable()
 class CustomTimerModel extends CustomTimer {
-  CustomTimerModel({
+  const CustomTimerModel({
     required super.id,
     required super.name,
     required super.duration,

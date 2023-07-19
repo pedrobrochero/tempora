@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/control_classes/failure.dart';
-import '../entities/timer.dart';
+import '../entities/custom_timer.dart';
 import '../usecases/create_timer.dart';
 
 /// A repository for timers.

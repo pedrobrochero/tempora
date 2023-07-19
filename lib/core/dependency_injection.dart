@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import '../features/foreground_service/presentation/cubit/foreground_service_cubit.dart';
 import '../features/timer/data/datasources/timers_local_data_source.dart';
 import '../features/timer/data/repositories/timers_repository_impl.dart';
-import '../features/timer/domain/entities/timer.dart';
+import '../features/timer/domain/entities/custom_timer.dart';
 import '../features/timer/domain/repositories/timers_repository.dart';
 import '../features/timer/domain/usecases/clear_notification.dart';
 import '../features/timer/domain/usecases/create_timer.dart';

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/control_classes/usecase.dart';
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/create_timer.dart';
 import '../../domain/usecases/delete_timer.dart';
 import '../../domain/usecases/get_timers.dart';

@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 
 // TODO(pedrobrochero): Remove this faker file.
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import '../../../../core/data/datasources/timers_sqlite_db.dart';
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 import '../models/custom_timer_model.dart';
 
 /// A data source for timers.

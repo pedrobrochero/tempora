@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/control_classes/failure.dart';
 import '../../../../core/data/providers/uuid_provider.dart';
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 import '../../domain/repositories/timers_repository.dart';
 import '../../domain/usecases/create_timer.dart';
 import '../datasources/timers_local_data_source.dart';

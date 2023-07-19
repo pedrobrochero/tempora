@@ -5,7 +5,7 @@ import '../../../../core/presentation/utils/context_extension.dart';
 import '../../../../core/presentation/widgets/confirm_dialog_component.dart';
 import '../../../../generated/l10n.dart';
 import '../../../foreground_service/presentation/cubit/foreground_service_cubit.dart';
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 import '../cubit/timer_cubit.dart';
 import '../cubit/timer_list_cubit.dart';
 

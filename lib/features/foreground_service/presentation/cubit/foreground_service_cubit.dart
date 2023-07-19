@@ -2,7 +2,7 @@ import 'package:flutter_background/flutter_background.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../timer/domain/entities/timer.dart';
+import '../../../timer/domain/entities/custom_timer.dart';
 
 part 'foreground_service_cubit.freezed.dart';
 part 'foreground_service_state.dart';

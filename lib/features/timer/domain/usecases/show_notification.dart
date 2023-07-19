@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../../../../core/control_classes/failure.dart';
 import '../../../../core/control_classes/usecase.dart';
 import '../../../../core/data/providers/local_notifications_provider.dart';
-import '../entities/timer.dart';
+import '../entities/custom_timer.dart';
 
 class ShowNotification implements UseCase<void, CustomTimer> {
   const ShowNotification({

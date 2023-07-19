@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../../../core/control_classes/failure.dart';
 import '../../../../core/control_classes/usecase.dart';
-import '../entities/timer.dart';
+import '../entities/custom_timer.dart';
 import '../repositories/timers_repository.dart';
 
 /// Returns a list of [CustomTimer]s.

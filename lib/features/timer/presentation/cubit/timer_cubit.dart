@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../domain/entities/timer.dart';
+import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/clear_notification.dart';
 import '../../domain/usecases/show_notification.dart';
 
