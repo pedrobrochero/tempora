@@ -25,11 +25,17 @@ class TimerListPage extends StatelessWidget {
               final blocs =
                   timers.map((e) => sl<TimerCubit>(param1: e)).toList();
               return ListView.builder(
-                itemCount: timers.length,
-                itemBuilder: (context, index) => TimerTile(
-                  cubit: blocs[index],
-                  key: ValueKey(timers),
-                ),
+                itemCount: timers.length + 1,
+                itemBuilder: (context, index) {
+                  // Spacer to avoid overlapping with FAB.
+                  if (index == timers.length) {
+                    return const SizedBox(height: 64);
+                  }
+                  return TimerTile(
+                    cubit: blocs[index],
+                    key: ValueKey(timers),
+                  );
+                },
               );
             },
           ),
