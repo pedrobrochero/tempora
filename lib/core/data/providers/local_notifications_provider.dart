@@ -62,12 +62,13 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
     required String androidChannelName,
     String? body,
   }) async {
-    final vibrationPattern = Int64List(4);
-    vibrationPattern[0] = 0;
-    vibrationPattern[1] = 1000;
-    vibrationPattern[2] = 5000;
-    vibrationPattern[3] = 2000;
-    // TODO(pedrobrochero): Use Int64.fromList().
+    // TODO(pedrobrochero): Test this vibration pattern.
+    final vibrationPattern = Int64List.fromList([
+      0,
+      1000,
+      5000,
+      2000,
+    ]);
 
     final notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
