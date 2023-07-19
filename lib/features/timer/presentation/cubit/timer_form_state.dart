@@ -6,8 +6,8 @@ class TimerFormState with _$TimerFormState {
     @Default(InitialStatus()) Status status,
     @Default('') String name,
     String? nameError,
-    @Default('00') String seconds,
-    @Default('00') String minutes,
+    @Default('') String seconds,
+    @Default('') String minutes,
     String? durationError,
   }) = _Initial;
 
@@ -17,5 +17,5 @@ class TimerFormState with _$TimerFormState {
   bool get isValid =>
       nameError == null &&
       durationError == null &&
-      (minutes != '00' || seconds != '00');
+      (minutes != '' || seconds != '');
 }

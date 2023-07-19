@@ -21,9 +21,10 @@ class TimerForm extends StatelessWidget {
             if (state.status is SuccessStatus) {
               final params = CreateTimerParams(
                 name: state.name,
+                // Bloc ensures that duration is not zero.
                 duration: Duration(
-                  minutes: int.parse(state.minutes),
-                  seconds: int.parse(state.seconds),
+                  minutes: int.tryParse(state.minutes) ?? 0,
+                  seconds: int.tryParse(state.seconds) ?? 0,
                 ),
               );
               Navigator.of(context).pop(params);

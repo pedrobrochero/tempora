@@ -34,9 +34,9 @@ class TimerFormCubit extends Cubit<TimerFormState> {
     String? minutesString,
     String? secondsString,
   }) {
-    final minutes = int.tryParse(minutesString ?? state.minutes);
-    final seconds = int.tryParse(secondsString ?? state.seconds);
-    if (minutes == null || seconds == null) {
+    final minutes = int.tryParse(minutesString ?? state.minutes) ?? 0;
+    final seconds = int.tryParse(secondsString ?? state.seconds) ?? 0;
+    if (minutes == 0 && seconds == 0) {
       return 'Invalid duration';
     } else if (minutes < 0 || seconds < 0) {
       return 'Duration must be positive';

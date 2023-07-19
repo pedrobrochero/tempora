@@ -175,8 +175,8 @@ class _$_Initial extends _Initial {
       {this.status = const InitialStatus(),
       this.name = '',
       this.nameError,
-      this.seconds = '00',
-      this.minutes = '00',
+      this.seconds = '',
+      this.minutes = '',
       this.durationError})
       : super._();
 
