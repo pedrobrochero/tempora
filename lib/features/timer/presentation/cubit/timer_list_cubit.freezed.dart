@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TimerListState {
   List<CustomTimer> get timers => throw _privateConstructorUsedError;
+  List<TimerCubit> get timersCubits => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TimerListStateCopyWith<TimerListState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $TimerListStateCopyWith<$Res> {
           TimerListState value, $Res Function(TimerListState) then) =
       _$TimerListStateCopyWithImpl<$Res, TimerListState>;
   @useResult
-  $Res call({List<CustomTimer> timers});
+  $Res call({List<CustomTimer> timers, List<TimerCubit> timersCubits});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$TimerListStateCopyWithImpl<$Res, $Val extends TimerListState>
   @override
   $Res call({
     Object? timers = null,
+    Object? timersCubits = null,
   }) {
     return _then(_value.copyWith(
       timers: null == timers
           ? _value.timers
           : timers // ignore: cast_nullable_to_non_nullable
               as List<CustomTimer>,
+      timersCubits: null == timersCubits
+          ? _value.timersCubits
+          : timersCubits // ignore: cast_nullable_to_non_nullable
+              as List<TimerCubit>,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$_TimerListStateCopyWith<$Res>
       __$$_TimerListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<CustomTimer> timers});
+  $Res call({List<CustomTimer> timers, List<TimerCubit> timersCubits});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$_TimerListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? timers = null,
+    Object? timersCubits = null,
   }) {
     return _then(_$_TimerListState(
       timers: null == timers
           ? _value._timers
           : timers // ignore: cast_nullable_to_non_nullable
               as List<CustomTimer>,
+      timersCubits: null == timersCubits
+          ? _value._timersCubits
+          : timersCubits // ignore: cast_nullable_to_non_nullable
+              as List<TimerCubit>,
     ));
   }
 }
@@ -92,8 +103,11 @@ class __$$_TimerListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TimerListState implements _TimerListState {
-  const _$_TimerListState({final List<CustomTimer> timers = const []})
-      : _timers = timers;
+  const _$_TimerListState(
+      {final List<CustomTimer> timers = const [],
+      final List<TimerCubit> timersCubits = const []})
+      : _timers = timers,
+        _timersCubits = timersCubits;
 
   final List<CustomTimer> _timers;
   @override
@@ -104,9 +118,18 @@ class _$_TimerListState implements _TimerListState {
     return EqualUnmodifiableListView(_timers);
   }
 
+  final List<TimerCubit> _timersCubits;
+  @override
+  @JsonKey()
+  List<TimerCubit> get timersCubits {
+    if (_timersCubits is EqualUnmodifiableListView) return _timersCubits;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_timersCubits);
+  }
+
   @override
   String toString() {
-    return 'TimerListState(timers: $timers)';
+    return 'TimerListState(timers: $timers, timersCubits: $timersCubits)';
   }
 
   @override
@@ -114,12 +137,16 @@ class _$_TimerListState implements _TimerListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TimerListState &&
-            const DeepCollectionEquality().equals(other._timers, _timers));
+            const DeepCollectionEquality().equals(other._timers, _timers) &&
+            const DeepCollectionEquality()
+                .equals(other._timersCubits, _timersCubits));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_timers));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_timers),
+      const DeepCollectionEquality().hash(_timersCubits));
 
   @JsonKey(ignore: true)
   @override
@@ -129,11 +156,14 @@ class _$_TimerListState implements _TimerListState {
 }
 
 abstract class _TimerListState implements TimerListState {
-  const factory _TimerListState({final List<CustomTimer> timers}) =
-      _$_TimerListState;
+  const factory _TimerListState(
+      {final List<CustomTimer> timers,
+      final List<TimerCubit> timersCubits}) = _$_TimerListState;
 
   @override
   List<CustomTimer> get timers;
+  @override
+  List<TimerCubit> get timersCubits;
   @override
   @JsonKey(ignore: true)
   _$$_TimerListStateCopyWith<_$_TimerListState> get copyWith =>

@@ -13,8 +13,6 @@ import '../widgets/timer_tile.dart';
 class TimerListPage extends StatelessWidget {
   const TimerListPage({Key? key}) : super(key: key);
 
-  // TODO(pedrobrochero): Generate and close blocs from TimerListCubit.
-
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (context) => sl<TimerListCubit>(),
@@ -22,8 +20,7 @@ class TimerListPage extends StatelessWidget {
           body: BlocBuilder<TimerListCubit, TimerListState>(
             builder: (context, state) {
               final timers = state.timers;
-              final blocs =
-                  timers.map((e) => sl<TimerCubit>(param1: e)).toList();
+              timers.map((e) => sl<TimerCubit>(param1: e)).toList();
               return ListView.builder(
                 itemCount: timers.length + 1,
                 itemBuilder: (context, index) {
@@ -32,7 +29,9 @@ class TimerListPage extends StatelessWidget {
                     return const SizedBox(height: 64);
                   }
                   return TimerTile(
-                    cubit: blocs[index],
+                    cubit: context
+                        .watch<TimerListCubit>()
+                        .getTimerCubit(timers[index]),
                     key: ValueKey(timers),
                   );
                 },
