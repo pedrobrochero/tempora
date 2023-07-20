@@ -56,4 +56,15 @@ class TimersRepositoryImpl implements TimersRepository {
       return Left(UnknownFailure(e));
     }
   }
+
+  /// Edits a [CustomTimer] in the database.
+  @override
+  Future<Either<Failure, void>> editTimer(CustomTimer timer) async {
+    try {
+      await localDataSource.editTimer(timer);
+      return const Right(null);
+    } catch (e) {
+      return Left(UnknownFailure(e));
+    }
+  }
 }

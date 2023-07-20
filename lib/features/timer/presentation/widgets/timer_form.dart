@@ -125,32 +125,33 @@ class DurationRow extends StatelessWidget {
   final Duration? initialDuration;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 48),
-        child: Row(
-          children: [
-            Flexible(
-              child: TimeInput(
-                initialValue: initialDuration?.inMinutes,
-                labelText: S.of(context).minutes,
-                hintText: '00',
-                onChanged: context.read<TimerFormCubit>().setMinutes,
-              ),
+  Widget build(BuildContext context) => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 112,
+            child: TimeInput(
+              initialValue: initialDuration?.inMinutes,
+              labelText: S.of(context).minutes,
+              hintText: '00',
+              onChanged: context.read<TimerFormCubit>().setMinutes,
             ),
-            const SizedBox(width: 8),
-            Text(':', style: context.textTheme.displayLarge),
-            const SizedBox(width: 8),
-            Flexible(
-              child: TimeInput(
-                initialValue: initialDuration?.inSeconds.remainder(60),
-                labelText: S.of(context).seconds,
-                hintText: '00',
-                onChanged: context.read<TimerFormCubit>().setSeconds,
-                onSubmit: (_) => context.read<TimerFormCubit>().submit(),
-              ),
+          ),
+          const SizedBox(width: 8),
+          Text(':', style: context.textTheme.displayLarge),
+          const SizedBox(width: 8),
+          SizedBox(
+            width: 112,
+            child: TimeInput(
+              initialValue: initialDuration?.inSeconds.remainder(60),
+              labelText: S.of(context).seconds,
+              hintText: '00',
+              onChanged: context.read<TimerFormCubit>().setSeconds,
+              onSubmit: (_) => context.read<TimerFormCubit>().submit(),
             ),
-          ],
-        ),
+          ),
+        ],
       );
 }
 

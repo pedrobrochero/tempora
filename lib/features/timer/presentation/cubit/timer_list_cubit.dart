@@ -7,6 +7,7 @@ import '../../../../core/dependency_injection.dart';
 import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/create_timer.dart';
 import '../../domain/usecases/delete_timer.dart';
+import '../../domain/usecases/edit_timer.dart';
 import '../../domain/usecases/get_timers.dart';
 import 'timer_cubit.dart';
 
@@ -16,46 +17,63 @@ part 'timer_list_state.dart';
 /// A [Cubit] that manages the state of a list of timers.
 class TimerListCubit extends Cubit<TimerListState> {
   TimerListCubit({
-    required this.getTimers,
-    required this.createTimer,
-    required this.deleteTimer,
+    required this.getTimersUsecase,
+    required this.createTimerUsecase,
+    required this.deleteTimerUsecase,
+    required this.editTimerUsecase,
   }) : super(const TimerListState()) {
     getInitialData();
   }
 
+  // TODO(pedrobrochero): Handle errors properly.
+
   /// A use case to get a list of timers.
   @visibleForTesting
-  final GetTimers getTimers;
+  final GetTimers getTimersUsecase;
 
   /// A use case to create a timer.
   @visibleForTesting
-  final CreateTimer createTimer;
+  final CreateTimer createTimerUsecase;
 
   /// A use case to delete a timer.
   @visibleForTesting
-  final DeleteTimer deleteTimer;
+  final DeleteTimer deleteTimerUsecase;
+
+  /// A use case to edit a timer.
+  @visibleForTesting
+  final EditTimer editTimerUsecase;
 
   void getInitialData() async {
-    (await getTimers(const NoParams())).fold(
+    (await getTimersUsecase(const NoParams())).fold(
       (failure) => emit(state.copyWith()),
       (timers) => emit(state.copyWith(timers: timers)),
     );
   }
 
-  void createTimerAction(CreateTimerParams params) async {
-    (await createTimer(params)).fold(
+  void createTimer(CreateTimerParams params) async {
+    (await createTimerUsecase(params)).fold(
       (failure) => emit(state.copyWith()),
       (_) => getInitialData(),
     );
   }
 
-  void deleteTimerAction(String id) async {
-    final either = await deleteTimer(id);
+  void deleteTimer(CustomTimer timer) async {
+    final either = await deleteTimerUsecase(timer.id);
     either.fold(
-      (failure) {
-        emit(state.copyWith());
-      },
+      (failure) => emit(state.copyWith()),
       (_) {
+        removeTimerCubit(timer);
+        getInitialData();
+      },
+    );
+  }
+
+  void editTimer(CustomTimer timer) async {
+    final either = await editTimerUsecase(timer);
+    either.fold(
+      (failure) => emit(state.copyWith()),
+      (_) {
+        removeTimerCubit(timer);
         getInitialData();
       },
     );
@@ -73,6 +91,15 @@ class TimerListCubit extends Cubit<TimerListState> {
       emit(state.copyWith(timersCubits: [...state.timersCubits, cubit]));
     }
     return cubit;
+  }
+
+  /// Removes a [TimerCubit] from the [TimerListCubit] state list.
+  void removeTimerCubit(CustomTimer timer) {
+    final cubit = state.timersCubits
+        .firstWhereOrNull((element) => element.timer.id == timer.id);
+    cubit?.close();
+    final newList = List<TimerCubit>.from(state.timersCubits)..remove(cubit);
+    emit(state.copyWith(timersCubits: newList));
   }
 
   @override

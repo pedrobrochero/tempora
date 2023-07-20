@@ -14,4 +14,7 @@ abstract class TimersRepository {
 
   /// Deletes a [CustomTimer] from the database.
   Future<Either<Failure, void>> deleteTimer(String id);
+
+  /// Edits a [CustomTimer] in the database.
+  Future<Either<Failure, void>> editTimer(CustomTimer timer);
 }

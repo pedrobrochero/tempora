@@ -43,9 +43,7 @@ class TimerListPage extends StatelessWidget {
                     onPressed: () async {
                       final result = await showCreateTimerForm(context);
                       if (result is CreateTimerParams) {
-                        context
-                            .read<TimerListCubit>()
-                            .createTimerAction(result);
+                        context.read<TimerListCubit>().createTimer(result);
                       }
                     },
                     child: const Icon(Icons.add_alarm),

@@ -14,6 +14,9 @@ abstract class TimersLocalDataSource {
 
   /// Deletes a timer with the given [id].
   Future<void> deleteTimer(String id);
+
+  /// Edits a [CustomTimer] in the database.
+  Future<void> editTimer(CustomTimer timer);
 }
 
 class TimersLocalDataSourceImpl implements TimersLocalDataSource {
@@ -45,6 +48,17 @@ class TimersLocalDataSourceImpl implements TimersLocalDataSource {
       TimersTable.tableName,
       where: '${TimersTable.id} = ?',
       whereArgs: [id],
+    );
+  }
+
+  @override
+  Future<void> editTimer(CustomTimer timer) async {
+    final db = await sqliteProvider.database;
+    await db.update(
+      TimersTable.tableName,
+      CustomTimerModel.fromEntity(timer).toJson(),
+      where: '${TimersTable.id} = ?',
+      whereArgs: [timer.id],
     );
   }
 }

@@ -13,5 +13,8 @@ class CustomTimer extends Equatable {
   final Duration duration;
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, name, duration.inSeconds];
+
+  bool isEquivalentTo(CustomTimer other) =>
+      id == other.id && name == other.name && duration == other.duration;
 }
