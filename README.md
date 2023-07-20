@@ -15,3 +15,7 @@ This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In th
 ### Others
 - Login and sync timers.
 - No-ads version.
+- Scroll down in list when notification is tapped.
+- Show timer(s) progress(s) in persistent notification.
+- Pass all strings to dictionary
+- Add analytics and crashlytics

@@ -25,5 +25,13 @@
   "loginWithGoogle": "Ingresar con Google",
   "youHaveNoAccess": "Aún no tienes acceso al sistema, contacta al administrador.",
   "logout": "Cerrar sesión",
-  "deleteTimerQuestion": "Are you sure you want to delete this timer?"
+  "deleteTimerQuestion": "Are you sure you want to delete this timer?",
+  "createTimer": "Create a new timer",
+  "timerName": "Timer name",
+  "enterANameForYourTimer": "Enter a name for your timer",
+  "create": "Create",
+  "minutes": "Minutes",
+  "seconds": "Seconds",
+  "editTimer": "Edit timer",
+  "saveChanges": "Save changes"
 }

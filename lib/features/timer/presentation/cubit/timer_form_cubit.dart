@@ -2,13 +2,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/control_classes/status.dart';
+import '../../domain/entities/custom_timer.dart';
 
 part 'timer_form_cubit.freezed.dart';
 part 'timer_form_state.dart';
 
 /// Cubit for the timer form.
 class TimerFormCubit extends Cubit<TimerFormState> {
-  TimerFormCubit() : super(const TimerFormState());
+  TimerFormCubit(CustomTimer? timer)
+      : super(TimerFormState(
+          name: timer?.name ?? '',
+          minutes: timer?.duration.inMinutes.toString() ?? '',
+          seconds: timer?.duration.inSeconds.remainder(60).toString() ?? '',
+        ));
 
   void setName(String name) {
     emit(state.copyWith(name: name));

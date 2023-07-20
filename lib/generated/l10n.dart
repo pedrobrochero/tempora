@@ -319,6 +319,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Create a new timer`
+  String get createTimer {
+    return Intl.message(
+      'Create a new timer',
+      name: 'createTimer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Timer name`
+  String get timerName {
+    return Intl.message(
+      'Timer name',
+      name: 'timerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a name for your timer`
+  String get enterANameForYourTimer {
+    return Intl.message(
+      'Enter a name for your timer',
+      name: 'enterANameForYourTimer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create {
+    return Intl.message(
+      'Create',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minutes`
+  String get minutes {
+    return Intl.message(
+      'Minutes',
+      name: 'minutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seconds`
+  String get seconds {
+    return Intl.message(
+      'Seconds',
+      name: 'seconds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit timer`
+  String get editTimer {
+    return Intl.message(
+      'Edit timer',
+      name: 'editTimer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

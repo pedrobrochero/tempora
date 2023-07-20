@@ -16,11 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TimerFormState {
-  Status get status => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get nameError => throw _privateConstructorUsedError;
   String get seconds => throw _privateConstructorUsedError;
   String get minutes => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
+  String? get nameError => throw _privateConstructorUsedError;
   String? get durationError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,11 +35,11 @@ abstract class $TimerFormStateCopyWith<$Res> {
       _$TimerFormStateCopyWithImpl<$Res, TimerFormState>;
   @useResult
   $Res call(
-      {Status status,
-      String name,
-      String? nameError,
+      {String name,
       String seconds,
       String minutes,
+      Status status,
+      String? nameError,
       String? durationError});
 
   $StatusCopyWith<$Res> get status;
@@ -58,26 +58,18 @@ class _$TimerFormStateCopyWithImpl<$Res, $Val extends TimerFormState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? name = null,
-    Object? nameError = freezed,
     Object? seconds = null,
     Object? minutes = null,
+    Object? status = null,
+    Object? nameError = freezed,
     Object? durationError = freezed,
   }) {
     return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as Status,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      nameError: freezed == nameError
-          ? _value.nameError
-          : nameError // ignore: cast_nullable_to_non_nullable
-              as String?,
       seconds: null == seconds
           ? _value.seconds
           : seconds // ignore: cast_nullable_to_non_nullable
@@ -86,6 +78,14 @@ class _$TimerFormStateCopyWithImpl<$Res, $Val extends TimerFormState>
           ? _value.minutes
           : minutes // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
+      nameError: freezed == nameError
+          ? _value.nameError
+          : nameError // ignore: cast_nullable_to_non_nullable
+              as String?,
       durationError: freezed == durationError
           ? _value.durationError
           : durationError // ignore: cast_nullable_to_non_nullable
@@ -111,11 +111,11 @@ abstract class _$$_InitialCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status status,
-      String name,
-      String? nameError,
+      {String name,
       String seconds,
       String minutes,
+      Status status,
+      String? nameError,
       String? durationError});
 
   @override
@@ -132,26 +132,18 @@ class __$$_InitialCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? name = null,
-    Object? nameError = freezed,
     Object? seconds = null,
     Object? minutes = null,
+    Object? status = null,
+    Object? nameError = freezed,
     Object? durationError = freezed,
   }) {
     return _then(_$_Initial(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as Status,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      nameError: freezed == nameError
-          ? _value.nameError
-          : nameError // ignore: cast_nullable_to_non_nullable
-              as String?,
       seconds: null == seconds
           ? _value.seconds
           : seconds // ignore: cast_nullable_to_non_nullable
@@ -160,6 +152,14 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.minutes
           : minutes // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
+      nameError: freezed == nameError
+          ? _value.nameError
+          : nameError // ignore: cast_nullable_to_non_nullable
+              as String?,
       durationError: freezed == durationError
           ? _value.durationError
           : durationError // ignore: cast_nullable_to_non_nullable
@@ -172,34 +172,31 @@ class __$$_InitialCopyWithImpl<$Res>
 
 class _$_Initial extends _Initial {
   const _$_Initial(
-      {this.status = const InitialStatus(),
-      this.name = '',
+      {required this.name,
+      required this.seconds,
+      required this.minutes,
+      this.status = const InitialStatus(),
       this.nameError,
-      this.seconds = '',
-      this.minutes = '',
       this.durationError})
       : super._();
 
   @override
+  final String name;
+  @override
+  final String seconds;
+  @override
+  final String minutes;
+  @override
   @JsonKey()
   final Status status;
   @override
-  @JsonKey()
-  final String name;
-  @override
   final String? nameError;
-  @override
-  @JsonKey()
-  final String seconds;
-  @override
-  @JsonKey()
-  final String minutes;
   @override
   final String? durationError;
 
   @override
   String toString() {
-    return 'TimerFormState(status: $status, name: $name, nameError: $nameError, seconds: $seconds, minutes: $minutes, durationError: $durationError)';
+    return 'TimerFormState(name: $name, seconds: $seconds, minutes: $minutes, status: $status, nameError: $nameError, durationError: $durationError)';
   }
 
   @override
@@ -207,19 +204,19 @@ class _$_Initial extends _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.nameError, nameError) ||
-                other.nameError == nameError) &&
             (identical(other.seconds, seconds) || other.seconds == seconds) &&
             (identical(other.minutes, minutes) || other.minutes == minutes) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.nameError, nameError) ||
+                other.nameError == nameError) &&
             (identical(other.durationError, durationError) ||
                 other.durationError == durationError));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, status, name, nameError, seconds, minutes, durationError);
+      runtimeType, name, seconds, minutes, status, nameError, durationError);
 
   @JsonKey(ignore: true)
   @override
@@ -230,24 +227,24 @@ class _$_Initial extends _Initial {
 
 abstract class _Initial extends TimerFormState {
   const factory _Initial(
-      {final Status status,
-      final String name,
+      {required final String name,
+      required final String seconds,
+      required final String minutes,
+      final Status status,
       final String? nameError,
-      final String seconds,
-      final String minutes,
       final String? durationError}) = _$_Initial;
   const _Initial._() : super._();
 
   @override
-  Status get status;
-  @override
   String get name;
-  @override
-  String? get nameError;
   @override
   String get seconds;
   @override
   String get minutes;
+  @override
+  Status get status;
+  @override
+  String? get nameError;
   @override
   String? get durationError;
   @override

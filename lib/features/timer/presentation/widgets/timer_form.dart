@@ -5,28 +5,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/control_classes/status.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/datasources/fake_data_source.dart';
+import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/create_timer.dart';
 import '../cubit/timer_form_cubit.dart';
 
 /// A form for creating a new timer.
 class TimerForm extends StatelessWidget {
-  const TimerForm({super.key});
+  const TimerForm({
+    this.timer,
+    super.key,
+  });
+
+  /// The timer to edit, if any.
+  final CustomTimer? timer;
+
+  /// Whether the form is being used to edit an existing timer.
+  bool get isEditing => timer != null;
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) => TimerFormCubit(),
+        create: (context) => TimerFormCubit(timer),
         child: BlocListener<TimerFormCubit, TimerFormState>(
           listener: (context, state) {
             if (state.status is SuccessStatus) {
-              final params = CreateTimerParams(
-                name: state.name,
-                // Bloc ensures that duration is not zero.
-                duration: Duration(
-                  minutes: int.tryParse(state.minutes) ?? 0,
-                  seconds: int.tryParse(state.seconds) ?? 0,
-                ),
-              );
+              final params = isEditing
+                  ? CustomTimer(
+                      id: timer!.id,
+                      name: state.name,
+                      duration: state.duration,
+                    )
+                  : CreateTimerParams(
+                      name: state.name,
+                      duration: state.duration,
+                    );
               Navigator.of(context).pop(params);
               return;
             }
@@ -40,14 +53,18 @@ class TimerForm extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Create a new timer',
-                            style: context.textTheme.titleLarge,
+                            isEditing
+                                ? S.of(context).editTimer
+                                : S.of(context).createTimer,
+                            style: context.textTheme.titleLarge
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(height: 16),
-                          TextField(
-                            decoration: const InputDecoration(
-                              labelText: 'Timer name',
-                              hintText: 'Enter a name for your timer',
+                          TextFormField(
+                            initialValue: timer?.name,
+                            decoration: InputDecoration(
+                              labelText: S.of(context).timerName,
+                              hintText: S.of(context).enterANameForYourTimer,
                             ),
                             autofocus: true,
                             textInputAction: TextInputAction.next,
@@ -55,31 +72,27 @@ class TimerForm extends StatelessWidget {
                             onChanged: context.read<TimerFormCubit>().setName,
                           ),
                           const SizedBox(height: 16),
-                          const DurationRow(),
+                          DurationRow(initialDuration: timer?.duration),
                           //! Duration error
-                          // BlocSelector<TimerFormCubit, TimerFormState, String?>(
-                          //   selector: (state) => state.durationError,
-                          //   builder: (context, state) {
-                          //     if (state != null) {
-                          //       return Text(
-                          //         state,
-                          //         style: context.textTheme.bodySmall?.copyWith(
-                          //           color: errorColor,
-                          //           fontWeight: FontWeight.bold,
-                          //         ),
-                          //       );
-                          //     }
-                          //     return const SizedBox();
-                          //   },
-                          // ),
-                          const SizedBox(height: 8),
+                          BlocSelector<TimerFormCubit, TimerFormState, String?>(
+                            selector: (state) => state.durationError,
+                            builder: (context, state) => Text(
+                              state ?? '',
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                           BlocSelector<TimerFormCubit, TimerFormState, bool>(
                             selector: (state) => state.isValid,
                             builder: (context, state) => ElevatedButton(
                               onPressed: !state
                                   ? null
                                   : context.read<TimerFormCubit>().submit,
-                              child: const Text('Create'),
+                              child: Text(isEditing
+                                  ? S.of(context).saveChanges
+                                  : S.of(context).create),
                             ),
                           ),
                           if (kDebugMode)
@@ -105,8 +118,11 @@ class TimerForm extends StatelessWidget {
 /// A row of two time inputs for minutes and seconds.
 class DurationRow extends StatelessWidget {
   const DurationRow({
+    this.initialDuration,
     super.key,
   });
+
+  final Duration? initialDuration;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -115,9 +131,8 @@ class DurationRow extends StatelessWidget {
           children: [
             Flexible(
               child: TimeInput(
-                initialValue:
-                    context.select((TimerFormCubit bloc) => bloc.state.minutes),
-                labelText: 'Minutes',
+                initialValue: initialDuration?.inMinutes,
+                labelText: S.of(context).minutes,
                 hintText: '00',
                 onChanged: context.read<TimerFormCubit>().setMinutes,
               ),
@@ -127,9 +142,8 @@ class DurationRow extends StatelessWidget {
             const SizedBox(width: 8),
             Flexible(
               child: TimeInput(
-                initialValue:
-                    context.select((TimerFormCubit bloc) => bloc.state.seconds),
-                labelText: 'Seconds',
+                initialValue: initialDuration?.inSeconds.remainder(60),
+                labelText: S.of(context).seconds,
                 hintText: '00',
                 onChanged: context.read<TimerFormCubit>().setSeconds,
                 onSubmit: (_) => context.read<TimerFormCubit>().submit(),
@@ -143,15 +157,15 @@ class DurationRow extends StatelessWidget {
 /// A text input for a time value.
 class TimeInput extends StatefulWidget {
   const TimeInput({
-    required this.initialValue,
     required this.labelText,
     required this.hintText,
     required this.onChanged,
+    this.initialValue,
     this.onSubmit,
     super.key,
   });
 
-  final String initialValue;
+  final int? initialValue;
   final String labelText;
   final String hintText;
   final void Function(String value) onChanged;
@@ -164,10 +178,13 @@ class TimeInput extends StatefulWidget {
 class _TimeInputState extends State<TimeInput> {
   bool get shouldSubmit => widget.onSubmit != null;
 
+  String get initialValue =>
+      widget.initialValue?.toString().padLeft(2, '0') ?? '';
+
   late final controller = TextEditingController()
-    ..text = widget.initialValue
+    ..text = initialValue
     ..selection =
-        TextSelection(baseOffset: 0, extentOffset: widget.initialValue.length);
+        TextSelection(baseOffset: 0, extentOffset: initialValue.length);
 
   @override
   void dispose() {
@@ -205,6 +222,23 @@ Future<CreateTimerParams?> showCreateTimerForm(BuildContext context) async {
   final params = await showModalBottomSheet<CreateTimerParams>(
       context: context,
       builder: (context) => const TimerForm(),
+      clipBehavior: Clip.antiAlias,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      isScrollControlled: true);
+  return params;
+}
+
+/// Shows the edit timer form and returns the parameters if the user submits the
+/// form.
+///
+/// Returns null if the user cancels the form.
+Future<CustomTimer?>? showEditTimerForm(
+    BuildContext context, CustomTimer timer) async {
+  final params = await showModalBottomSheet<CustomTimer>(
+      context: context,
+      builder: (context) => TimerForm(timer: timer),
       clipBehavior: Clip.antiAlias,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
