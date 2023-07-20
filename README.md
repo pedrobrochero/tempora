@@ -6,7 +6,6 @@ This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In th
 ## TODOs
 
 ### MVP
-- Edit timers.
 - Add favorite field for [CustomTimer].
 - Add timesStarted field for [CustomTimer].
 - Add sorting to timers list.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../../core/presentation/utils/context_extension.dart';
 import '../../../../core/presentation/widgets/confirm_dialog_component.dart';
@@ -8,6 +9,7 @@ import '../../../foreground_service/presentation/cubit/foreground_service_cubit.
 import '../../domain/entities/custom_timer.dart';
 import '../cubit/timer_cubit.dart';
 import '../cubit/timer_list_cubit.dart';
+import 'timer_form.dart';
 
 /// A [Widget] that displays a timer.
 class TimerTile extends StatelessWidget {
@@ -33,46 +35,71 @@ class TimerTile extends StatelessWidget {
                       : Colors.transparent,
                   width: 2),
             ),
-            child: ListTile(
-              title: Text(
-                cubit.timer.name,
-                style: context.textTheme.labelSmall,
-              ),
-              subtitle: BlocSelector<TimerCubit, TimerState, String>(
-                selector: (state) => state.clockTime,
-                builder: (context, state) => Text(
-                  state,
-                  style: context.textTheme.displaySmall,
-                ),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
+            child: Slidable(
+              startActionPane: ActionPane(
+                motion: const ScrollMotion(),
                 children: [
-                  _ResetButton(cubit.timer),
-                  BlocSelector<TimerCubit, TimerState, bool>(
-                    selector: (state) => state.isRunning,
-                    builder: (context, state) => state
-                        ? _StopButton(cubit.timer)
-                        : _StartButton(cubit.timer),
+                  SlidableAction(
+                    onPressed: (context) => deleteTimer(context),
+                    backgroundColor: Colors.red.shade900,
+                    icon: Icons.delete,
+                    label: S.of(context).delete,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) => editTimer(context),
+                    backgroundColor: Colors.orange.shade900,
+                    icon: Icons.edit,
+                    label: S.of(context).edit,
                   ),
                 ],
               ),
-              onLongPress: () async {
-                final result = await showConfirmDialog(
-                  context: context,
-                  message: S.of(context).deleteTimerQuestion,
-                  isDestructive: true,
-                );
-                if (result ?? false) {
-                  context
-                      .read<TimerListCubit>()
-                      .deleteTimerAction(cubit.timer.id);
-                }
-              },
+              child: ListTile(
+                title: Text(
+                  cubit.timer.name,
+                  style: context.textTheme.labelSmall,
+                ),
+                subtitle: BlocSelector<TimerCubit, TimerState, String>(
+                  selector: (state) => state.clockTime,
+                  builder: (context, state) => Text(
+                    state,
+                    style: context.textTheme.displaySmall,
+                  ),
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _ResetButton(cubit.timer),
+                    BlocSelector<TimerCubit, TimerState, bool>(
+                      selector: (state) => state.isRunning,
+                      builder: (context, state) => state
+                          ? _StopButton(cubit.timer)
+                          : _StartButton(cubit.timer),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
       );
+
+  void editTimer(BuildContext context) async {
+    final result = await showEditTimerForm(context, cubit.timer);
+    if (result != null && !result.isEquivalentTo(cubit.timer)) {
+      context.read<TimerListCubit>().editTimer(result);
+    }
+  }
+
+  void deleteTimer(BuildContext context) async {
+    final result = await showConfirmDialog(
+      context: context,
+      message: S.of(context).deleteTimerQuestion,
+      isDestructive: true,
+    );
+    if (result ?? false) {
+      context.read<TimerListCubit>().deleteTimer(cubit.timer);
+    }
+  }
 }
 
 class _ResetButton extends StatelessWidget {

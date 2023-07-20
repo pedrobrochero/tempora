@@ -41,8 +41,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createTimer":
             MessageLookupByLibrary.simpleMessage("Create a new timer"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteTimerQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this timer?"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "editTimer": MessageLookupByLibrary.simpleMessage("Edit timer"),
         "email": MessageLookupByLibrary.simpleMessage("Correo"),
         "emailToDeveloperBody": MessageLookupByLibrary.simpleMessage(

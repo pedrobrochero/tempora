@@ -33,5 +33,7 @@
   "minutes": "Minutes",
   "seconds": "Seconds",
   "editTimer": "Edit timer",
-  "saveChanges": "Save changes"
+  "saveChanges": "Save changes",
+  "delete": "Delete",
+  "edit": "Edit"
 }
