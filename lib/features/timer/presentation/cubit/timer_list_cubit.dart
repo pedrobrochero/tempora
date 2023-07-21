@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/control_classes/status.dart';
 import '../../../../core/control_classes/usecase.dart';
 import '../../../../core/dependency_injection.dart';
 import '../../domain/entities/custom_timer.dart';
@@ -25,8 +26,6 @@ class TimerListCubit extends Cubit<TimerListState> {
     getInitialData();
   }
 
-  // TODO(pedrobrochero): Handle errors properly.
-
   /// A use case to get a list of timers.
   @visibleForTesting
   final GetTimers getTimersUsecase;
@@ -45,14 +44,17 @@ class TimerListCubit extends Cubit<TimerListState> {
 
   void getInitialData() async {
     (await getTimersUsecase(const NoParams())).fold(
-      (failure) => emit(state.copyWith()),
-      (timers) => emit(state.copyWith(timers: timers)),
+      (failure) => emit(state.copyWith(status: const Status.error())),
+      (timers) => emit(state.copyWith(
+        timers: timers,
+        status: const Status.loaded(),
+      )),
     );
   }
 
   void createTimer(CreateTimerParams params) async {
     (await createTimerUsecase(params)).fold(
-      (failure) => emit(state.copyWith()),
+      (failure) => emit(state.copyWith(status: const Status.error())),
       (_) => getInitialData(),
     );
   }
@@ -60,7 +62,7 @@ class TimerListCubit extends Cubit<TimerListState> {
   void deleteTimer(CustomTimer timer) async {
     final either = await deleteTimerUsecase(timer.id);
     either.fold(
-      (failure) => emit(state.copyWith()),
+      (failure) => emit(state.copyWith(status: const Status.error())),
       (_) {
         removeTimerCubit(timer);
         getInitialData();
@@ -71,7 +73,7 @@ class TimerListCubit extends Cubit<TimerListState> {
   void editTimer(CustomTimer timer) async {
     final either = await editTimerUsecase(timer);
     either.fold(
-      (failure) => emit(state.copyWith()),
+      (failure) => emit(state.copyWith(status: const Status.error())),
       (_) {
         removeTimerCubit(timer);
         getInitialData();

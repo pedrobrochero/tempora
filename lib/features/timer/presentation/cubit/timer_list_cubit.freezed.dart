@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TimerListState {
+  Status get status => throw _privateConstructorUsedError;
   List<CustomTimer> get timers => throw _privateConstructorUsedError;
   List<TimerCubit> get timersCubits => throw _privateConstructorUsedError;
 
@@ -30,7 +31,10 @@ abstract class $TimerListStateCopyWith<$Res> {
           TimerListState value, $Res Function(TimerListState) then) =
       _$TimerListStateCopyWithImpl<$Res, TimerListState>;
   @useResult
-  $Res call({List<CustomTimer> timers, List<TimerCubit> timersCubits});
+  $Res call(
+      {Status status, List<CustomTimer> timers, List<TimerCubit> timersCubits});
+
+  $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -46,10 +50,15 @@ class _$TimerListStateCopyWithImpl<$Res, $Val extends TimerListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
     Object? timers = null,
     Object? timersCubits = null,
   }) {
     return _then(_value.copyWith(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       timers: null == timers
           ? _value.timers
           : timers // ignore: cast_nullable_to_non_nullable
@@ -59,6 +68,14 @@ class _$TimerListStateCopyWithImpl<$Res, $Val extends TimerListState>
           : timersCubits // ignore: cast_nullable_to_non_nullable
               as List<TimerCubit>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusCopyWith<$Res> get status {
+    return $StatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
   }
 }
 
@@ -70,7 +87,11 @@ abstract class _$$_TimerListStateCopyWith<$Res>
       __$$_TimerListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<CustomTimer> timers, List<TimerCubit> timersCubits});
+  $Res call(
+      {Status status, List<CustomTimer> timers, List<TimerCubit> timersCubits});
+
+  @override
+  $StatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -84,10 +105,15 @@ class __$$_TimerListStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
     Object? timers = null,
     Object? timersCubits = null,
   }) {
     return _then(_$_TimerListState(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       timers: null == timers
           ? _value._timers
           : timers // ignore: cast_nullable_to_non_nullable
@@ -104,11 +130,15 @@ class __$$_TimerListStateCopyWithImpl<$Res>
 
 class _$_TimerListState implements _TimerListState {
   const _$_TimerListState(
-      {final List<CustomTimer> timers = const [],
+      {this.status = const Status.loading(),
+      final List<CustomTimer> timers = const [],
       final List<TimerCubit> timersCubits = const []})
       : _timers = timers,
         _timersCubits = timersCubits;
 
+  @override
+  @JsonKey()
+  final Status status;
   final List<CustomTimer> _timers;
   @override
   @JsonKey()
@@ -129,7 +159,7 @@ class _$_TimerListState implements _TimerListState {
 
   @override
   String toString() {
-    return 'TimerListState(timers: $timers, timersCubits: $timersCubits)';
+    return 'TimerListState(status: $status, timers: $timers, timersCubits: $timersCubits)';
   }
 
   @override
@@ -137,6 +167,7 @@ class _$_TimerListState implements _TimerListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TimerListState &&
+            (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._timers, _timers) &&
             const DeepCollectionEquality()
                 .equals(other._timersCubits, _timersCubits));
@@ -145,6 +176,7 @@ class _$_TimerListState implements _TimerListState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      status,
       const DeepCollectionEquality().hash(_timers),
       const DeepCollectionEquality().hash(_timersCubits));
 
@@ -157,9 +189,12 @@ class _$_TimerListState implements _TimerListState {
 
 abstract class _TimerListState implements TimerListState {
   const factory _TimerListState(
-      {final List<CustomTimer> timers,
+      {final Status status,
+      final List<CustomTimer> timers,
       final List<TimerCubit> timersCubits}) = _$_TimerListState;
 
+  @override
+  Status get status;
   @override
   List<CustomTimer> get timers;
   @override

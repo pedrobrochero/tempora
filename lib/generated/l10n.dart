@@ -419,6 +419,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No timers yet. Create one!`
+  String get noTimersYet {
+    return Intl.message(
+      'No timers yet. Create one!',
+      name: 'noTimersYet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

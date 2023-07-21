@@ -35,5 +35,6 @@
   "editTimer": "Edit timer",
   "saveChanges": "Save changes",
   "delete": "Delete",
-  "edit": "Edit"
+  "edit": "Edit",
+  "noTimersYet": "No timers yet. Create one!"
 }

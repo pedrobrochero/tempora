@@ -40,13 +40,13 @@ class TimerTile extends StatelessWidget {
                 motion: const ScrollMotion(),
                 children: [
                   SlidableAction(
-                    onPressed: (context) => deleteTimer(context),
+                    onPressed: (_) => deleteTimer(context),
                     backgroundColor: Colors.red.shade900,
                     icon: Icons.delete,
                     label: S.of(context).delete,
                   ),
                   SlidableAction(
-                    onPressed: (context) => editTimer(context),
+                    onPressed: (_) => editTimer(context),
                     backgroundColor: Colors.orange.shade900,
                     icon: Icons.edit,
                     label: S.of(context).edit,

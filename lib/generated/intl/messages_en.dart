@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ingresar con Google"),
         "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
         "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
+        "noTimersYet":
+            MessageLookupByLibrary.simpleMessage("No timers yet. Create one!"),
         "nothingToShow": MessageLookupByLibrary.simpleMessage(
             "Ups, no hay nada por aqui aun..."),
         "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
