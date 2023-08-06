@@ -429,6 +429,66 @@ class S {
       args: [],
     );
   }
+
+  /// `My timers`
+  String get myTimers {
+    return Intl.message(
+      'My timers',
+      name: 'myTimers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort by`
+  String get sortBy {
+    return Intl.message(
+      'Sort by',
+      name: 'sortBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration`
+  String get duration {
+    return Intl.message(
+      'Duration',
+      name: 'duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Times started`
+  String get timesStarted {
+    return Intl.message(
+      'Times started',
+      name: 'timesStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is favorite`
+  String get isFavorite {
+    return Intl.message(
+      'Is favorite',
+      name: 'isFavorite',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

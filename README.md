@@ -10,6 +10,8 @@ This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In th
 - Add timesStarted field for [CustomTimer].
 - Add sorting to timers list.
 - Add ads banners.
+- Clear code TODOs.
+- Ensure dictionaries are correct.
 
 ### Others
 - Login and sync timers.

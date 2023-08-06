@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteTimerQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this timer?"),
+        "duration": MessageLookupByLibrary.simpleMessage("Duration"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "editTimer": MessageLookupByLibrary.simpleMessage("Edit timer"),
         "email": MessageLookupByLibrary.simpleMessage("Correo"),
@@ -51,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hola, me gustaría comentar algo acerca de la app: "),
         "enterANameForYourTimer":
             MessageLookupByLibrary.simpleMessage("Enter a name for your timer"),
+        "isFavorite": MessageLookupByLibrary.simpleMessage("Is favorite"),
         "login": MessageLookupByLibrary.simpleMessage("Ingresar"),
         "loginAsGuest":
             MessageLookupByLibrary.simpleMessage("Ingresar como invitado"),
@@ -58,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ingresar con Google"),
         "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
         "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
+        "myTimers": MessageLookupByLibrary.simpleMessage("My timers"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "noTimersYet":
             MessageLookupByLibrary.simpleMessage("No timers yet. Create one!"),
         "nothingToShow": MessageLookupByLibrary.simpleMessage(
@@ -71,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "seconds": MessageLookupByLibrary.simpleMessage("Seconds"),
         "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
+        "sortBy": MessageLookupByLibrary.simpleMessage("Sort by"),
         "termsOfUse":
             MessageLookupByLibrary.simpleMessage("Condiciones de uso"),
         "timeLapseDaysAgo": m1,
@@ -79,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeLapseTomorrow": MessageLookupByLibrary.simpleMessage("Mañana"),
         "timeLapseYesterday": MessageLookupByLibrary.simpleMessage("Ayer"),
         "timerName": MessageLookupByLibrary.simpleMessage("Timer name"),
+        "timesStarted": MessageLookupByLibrary.simpleMessage("Times started"),
         "youHaveNoAccess": MessageLookupByLibrary.simpleMessage(
             "Aún no tienes acceso al sistema, contacta al administrador.")
       };

@@ -36,5 +36,11 @@
   "saveChanges": "Save changes",
   "delete": "Delete",
   "edit": "Edit",
-  "noTimersYet": "No timers yet. Create one!"
+  "noTimersYet": "No timers yet. Create one!",
+  "myTimers": "My timers",
+  "sortBy": "Sort by",
+  "name": "Name",
+  "duration": "Duration",
+  "timesStarted": "Times started",
+  "isFavorite": "Is favorite"
 }

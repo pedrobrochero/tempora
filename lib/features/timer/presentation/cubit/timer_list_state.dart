@@ -6,5 +6,7 @@ class TimerListState with _$TimerListState {
     @Default(Status.loading()) Status status,
     @Default([]) List<CustomTimer> timers,
     @Default([]) List<TimerCubit> timersCubits,
+    @Default(TimerSorting.name) TimerSorting sorting,
+    @Default(false) bool reverseSorting,
   }) = _TimerListState;
 }

@@ -19,6 +19,8 @@ mixin _$TimerListState {
   Status get status => throw _privateConstructorUsedError;
   List<CustomTimer> get timers => throw _privateConstructorUsedError;
   List<TimerCubit> get timersCubits => throw _privateConstructorUsedError;
+  TimerSorting get sorting => throw _privateConstructorUsedError;
+  bool get reverseSorting => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TimerListStateCopyWith<TimerListState> get copyWith =>
@@ -32,7 +34,11 @@ abstract class $TimerListStateCopyWith<$Res> {
       _$TimerListStateCopyWithImpl<$Res, TimerListState>;
   @useResult
   $Res call(
-      {Status status, List<CustomTimer> timers, List<TimerCubit> timersCubits});
+      {Status status,
+      List<CustomTimer> timers,
+      List<TimerCubit> timersCubits,
+      TimerSorting sorting,
+      bool reverseSorting});
 
   $StatusCopyWith<$Res> get status;
 }
@@ -53,6 +59,8 @@ class _$TimerListStateCopyWithImpl<$Res, $Val extends TimerListState>
     Object? status = null,
     Object? timers = null,
     Object? timersCubits = null,
+    Object? sorting = null,
+    Object? reverseSorting = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -67,6 +75,14 @@ class _$TimerListStateCopyWithImpl<$Res, $Val extends TimerListState>
           ? _value.timersCubits
           : timersCubits // ignore: cast_nullable_to_non_nullable
               as List<TimerCubit>,
+      sorting: null == sorting
+          ? _value.sorting
+          : sorting // ignore: cast_nullable_to_non_nullable
+              as TimerSorting,
+      reverseSorting: null == reverseSorting
+          ? _value.reverseSorting
+          : reverseSorting // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -88,7 +104,11 @@ abstract class _$$_TimerListStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status status, List<CustomTimer> timers, List<TimerCubit> timersCubits});
+      {Status status,
+      List<CustomTimer> timers,
+      List<TimerCubit> timersCubits,
+      TimerSorting sorting,
+      bool reverseSorting});
 
   @override
   $StatusCopyWith<$Res> get status;
@@ -108,6 +128,8 @@ class __$$_TimerListStateCopyWithImpl<$Res>
     Object? status = null,
     Object? timers = null,
     Object? timersCubits = null,
+    Object? sorting = null,
+    Object? reverseSorting = null,
   }) {
     return _then(_$_TimerListState(
       status: null == status
@@ -122,6 +144,14 @@ class __$$_TimerListStateCopyWithImpl<$Res>
           ? _value._timersCubits
           : timersCubits // ignore: cast_nullable_to_non_nullable
               as List<TimerCubit>,
+      sorting: null == sorting
+          ? _value.sorting
+          : sorting // ignore: cast_nullable_to_non_nullable
+              as TimerSorting,
+      reverseSorting: null == reverseSorting
+          ? _value.reverseSorting
+          : reverseSorting // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -132,7 +162,9 @@ class _$_TimerListState implements _TimerListState {
   const _$_TimerListState(
       {this.status = const Status.loading(),
       final List<CustomTimer> timers = const [],
-      final List<TimerCubit> timersCubits = const []})
+      final List<TimerCubit> timersCubits = const [],
+      this.sorting = TimerSorting.name,
+      this.reverseSorting = false})
       : _timers = timers,
         _timersCubits = timersCubits;
 
@@ -158,8 +190,15 @@ class _$_TimerListState implements _TimerListState {
   }
 
   @override
+  @JsonKey()
+  final TimerSorting sorting;
+  @override
+  @JsonKey()
+  final bool reverseSorting;
+
+  @override
   String toString() {
-    return 'TimerListState(status: $status, timers: $timers, timersCubits: $timersCubits)';
+    return 'TimerListState(status: $status, timers: $timers, timersCubits: $timersCubits, sorting: $sorting, reverseSorting: $reverseSorting)';
   }
 
   @override
@@ -170,7 +209,10 @@ class _$_TimerListState implements _TimerListState {
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._timers, _timers) &&
             const DeepCollectionEquality()
-                .equals(other._timersCubits, _timersCubits));
+                .equals(other._timersCubits, _timersCubits) &&
+            (identical(other.sorting, sorting) || other.sorting == sorting) &&
+            (identical(other.reverseSorting, reverseSorting) ||
+                other.reverseSorting == reverseSorting));
   }
 
   @override
@@ -178,7 +220,9 @@ class _$_TimerListState implements _TimerListState {
       runtimeType,
       status,
       const DeepCollectionEquality().hash(_timers),
-      const DeepCollectionEquality().hash(_timersCubits));
+      const DeepCollectionEquality().hash(_timersCubits),
+      sorting,
+      reverseSorting);
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +235,9 @@ abstract class _TimerListState implements TimerListState {
   const factory _TimerListState(
       {final Status status,
       final List<CustomTimer> timers,
-      final List<TimerCubit> timersCubits}) = _$_TimerListState;
+      final List<TimerCubit> timersCubits,
+      final TimerSorting sorting,
+      final bool reverseSorting}) = _$_TimerListState;
 
   @override
   Status get status;
@@ -199,6 +245,10 @@ abstract class _TimerListState implements TimerListState {
   List<CustomTimer> get timers;
   @override
   List<TimerCubit> get timersCubits;
+  @override
+  TimerSorting get sorting;
+  @override
+  bool get reverseSorting;
   @override
   @JsonKey(ignore: true)
   _$$_TimerListStateCopyWith<_$_TimerListState> get copyWith =>

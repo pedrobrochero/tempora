@@ -42,6 +42,12 @@ class TimerListCubit extends Cubit<TimerListState> {
   @visibleForTesting
   final EditTimer editTimerUsecase;
 
+  @override
+  Future<void> close() async {
+    await Future.wait(state.timersCubits.map((e) => e.close()));
+    return super.close();
+  }
+
   void getInitialData() async {
     (await getTimersUsecase(const NoParams())).fold(
       (failure) => emit(state.copyWith(status: const Status.error())),
@@ -104,9 +110,40 @@ class TimerListCubit extends Cubit<TimerListState> {
     emit(state.copyWith(timersCubits: newList));
   }
 
-  @override
-  Future<void> close() async {
-    await Future.wait(state.timersCubits.map((e) => e.close()));
-    return super.close();
+  /// Sorts the timers by a given [TimerSorting]. If the [TimerSorting] is the
+  /// same as the current one, it will reverse the order.
+  void sort(TimerSorting result) {
+    List<CustomTimer> newTimers;
+    final isReversed = state.sorting == result && !state.reverseSorting;
+    switch (result) {
+      case TimerSorting.name:
+        newTimers = [...state.timers];
+        newTimers.sort((a, b) => a.name.compareTo(b.name));
+        break;
+      case TimerSorting.duration:
+        newTimers = [...state.timers];
+        newTimers.sort((a, b) => a.duration.compareTo(b.duration));
+        break;
+      // case TimerSorting.timesStarted:
+      //   state.timers.sort((a, b) => a.timesStarted.compareTo(b.timesStarted));
+      //   break;
+      // case TimerSorting.isFavorite:
+      //   state.timers.sort((a, b) => a.isFavorite.compareTo(b.isFavorite));
+      // break;
+      default:
+        newTimers = state.timers;
+        break;
+    }
+    if (isReversed) {
+      newTimers = newTimers.reversed.toList();
+    }
+
+    // TODO(pedrobrochero): Save sorting in sharedPrefs.
+
+    emit(state.copyWith(
+      sorting: result,
+      reverseSorting: isReversed,
+      timers: newTimers,
+    ));
   }
 }
