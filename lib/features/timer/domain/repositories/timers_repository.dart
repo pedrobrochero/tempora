@@ -18,4 +18,7 @@ abstract class TimersRepository {
 
   /// Edits a [CustomTimer] in the database.
   Future<Either<Failure, void>> editTimer(EditTimerParams params);
+
+  /// Adds to the [CustomTimer]'s timesStarted count.
+  Future<Either<Failure, void>> addToTimerCount(CustomTimer params);
 }

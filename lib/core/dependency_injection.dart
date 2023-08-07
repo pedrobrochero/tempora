@@ -7,6 +7,7 @@ import '../features/timer/data/datasources/timers_local_data_source.dart';
 import '../features/timer/data/repositories/timers_repository_impl.dart';
 import '../features/timer/domain/entities/custom_timer.dart';
 import '../features/timer/domain/repositories/timers_repository.dart';
+import '../features/timer/domain/usecases/add_to_timer_count.dart';
 import '../features/timer/domain/usecases/clear_notification.dart';
 import '../features/timer/domain/usecases/create_timer.dart';
 import '../features/timer/domain/usecases/delete_timer.dart';
@@ -38,6 +39,7 @@ Future<void> initDI() async {
             timer: timer,
             showNotification: sl(),
             clearNotification: sl(),
+            addToTimerCount: sl(),
           ));
   // Usecases
   sl.registerLazySingleton(() => GetTimers(repository: sl()));
@@ -46,6 +48,8 @@ Future<void> initDI() async {
   sl.registerLazySingleton(() => CreateTimer(repository: sl()));
   sl.registerLazySingleton(() => DeleteTimer(repository: sl()));
   sl.registerLazySingleton(() => EditTimer(repository: sl()));
+  sl.registerLazySingleton(() => AddToTimerCount(repository: sl()));
+
   // Repos
   sl.registerLazySingleton<TimersRepository>(
     () => TimersRepositoryImpl(sl()),

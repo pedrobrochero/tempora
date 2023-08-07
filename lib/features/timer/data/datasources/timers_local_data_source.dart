@@ -22,6 +22,9 @@ abstract class TimersLocalDataSource {
 
   /// Edits a [CustomTimer] in the database.
   Future<void> editTimer(EditTimerParams params);
+
+  /// Adds to the [CustomTimer]'s timesStarted count.
+  Future<void> addToTimerCount(CustomTimer params);
 }
 
 class TimersLocalDataSourceImpl implements TimersLocalDataSource {
@@ -89,5 +92,15 @@ class TimersLocalDataSourceImpl implements TimersLocalDataSource {
       where: '${TimersTable.id} = ?',
       whereArgs: [params.id],
     );
+  }
+
+  @override
+  Future<void> addToTimerCount(CustomTimer timer) async {
+    final db = await sqliteProvider.database;
+    await db.rawUpdate(
+        'UPDATE ${TimersTable.tableName} '
+        'SET ${TimersTable.timesStarted} = ${TimersTable.timesStarted} + 1 '
+        'WHERE ${TimersTable.id} = ?',
+        [timer.id]);
   }
 }

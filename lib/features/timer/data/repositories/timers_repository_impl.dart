@@ -18,9 +18,6 @@ class TimersRepositoryImpl implements TimersRepository {
   /// A provider for uuid.
   final UuidProvider uuidProvider = UuidProviderImpl();
 
-  /// Returns a list of [CustomTimer]s.
-  ///
-  /// If something goes wrong, a [Failure] is returned.
   @override
   Future<Either<Failure, List<CustomTimer>>> getTimers() async {
     try {
@@ -31,7 +28,6 @@ class TimersRepositoryImpl implements TimersRepository {
     }
   }
 
-  /// Creates a new [CustomTimer] in the database.
   @override
   Future<Either<Failure, void>> createTimer(CreateTimerParams params) async {
     try {
@@ -45,7 +41,6 @@ class TimersRepositoryImpl implements TimersRepository {
     }
   }
 
-  /// Deletes a [CustomTimer] from the database.
   @override
   Future<Either<Failure, void>> deleteTimer(String id) async {
     try {
@@ -56,11 +51,20 @@ class TimersRepositoryImpl implements TimersRepository {
     }
   }
 
-  /// Edits a [CustomTimer] in the database.
   @override
   Future<Either<Failure, void>> editTimer(EditTimerParams params) async {
     try {
       await localDataSource.editTimer(params);
+      return const Right(null);
+    } catch (e) {
+      return Left(UnknownFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addToTimerCount(CustomTimer params) async {
+    try {
+      await localDataSource.addToTimerCount(params);
       return const Right(null);
     } catch (e) {
       return Left(UnknownFailure(e));

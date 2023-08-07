@@ -126,10 +126,9 @@ class TimerListCubit extends Cubit<TimerListState> {
         newTimers = [...state.timers];
         newTimers.sort((a, b) => a.duration.compareTo(b.duration));
         break;
-      // TODO(pedrobrochero): Test this one.
       case TimerSorting.timesStarted:
         newTimers = [...state.timers];
-        newTimers.sort((a, b) => a.timesStarted.compareTo(b.timesStarted));
+        newTimers.sort((a, b) => b.timesStarted.compareTo(a.timesStarted));
         break;
       case TimerSorting.isFavorite:
         newTimers = [...state.timers];

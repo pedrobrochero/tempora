@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/custom_timer.dart';
+import '../../domain/usecases/add_to_timer_count.dart';
 import '../../domain/usecases/clear_notification.dart';
 import '../../domain/usecases/show_notification.dart';
 
@@ -16,6 +17,7 @@ class TimerCubit extends Cubit<TimerState> {
     required this.timer,
     required this.showNotification,
     required this.clearNotification,
+    required this.addToTimerCount,
   }) : super(TimerState(
           duration: timer.duration,
           remainingSeconds: timer.duration.inSeconds,
@@ -23,9 +25,11 @@ class TimerCubit extends Cubit<TimerState> {
   final CustomTimer timer;
   final ShowNotification showNotification;
   final ClearNotification clearNotification;
+  final AddToTimerCount addToTimerCount;
 
   /// Starts the timer.
   void startTimer() async {
+    addToTimerCount(timer);
     emit(
       state.copyWith(
         timer: Timer.periodic(const Duration(seconds: 1), (timer) {
