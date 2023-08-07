@@ -6,6 +6,7 @@ import '../../../../core/control_classes/status.dart';
 import '../../../../core/dependency_injection.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
 import '../../../../core/presentation/widgets/empty_list_component.dart';
+import '../../../../core/presentation/widgets/my_banner.dart';
 import '../../../../generated/l10n.dart';
 import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/create_timer.dart';
@@ -21,7 +22,7 @@ class TimerListPage extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider.value(
         // It's normal for this bloc to never be closed, as this is a one page
         // app. This is done because the timersCubits are created, closed and
-        // stored in this cubit.
+        // stored in this cubit, to avoid mess.
         value: sl<TimerListCubit>(),
         child: Scaffold(
           appBar: AppBar(
@@ -71,37 +72,47 @@ class TimerListPage extends StatelessWidget {
               ),
             ],
           ),
-          body: BlocConsumer<TimerListCubit, TimerListState>(
-            listener: (context, state) {
-              if (state.status is ErrorStatus) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(S.of(context).anErrorHasOcurred)),
-                );
-              }
-            },
-            builder: (context, state) {
-              final timers = state.timers;
-              if (timers.isEmpty) {
-                return EmptyListComponent(message: S.of(context).noTimersYet);
-              }
-              return ListView.builder(
-                itemCount: timers.length + 1,
-                itemBuilder: (context, index) {
-                  // Spacer to avoid overlapping with FAB.
-                  if (index == timers.length) {
-                    return const SizedBox(height: 64);
-                  }
-                  return Builder(builder: (context) {
-                    final timerCubit = context.select(
-                        (TimerListCubit c) => c.getTimerCubit(timers[index]));
-                    return TimerTile(
-                      cubit: timerCubit,
-                      key: ValueKey(timers[index]),
+          body: Column(
+            children: [
+              const MyBanner(mainPageBannerAdUnitId),
+              Expanded(
+                child: BlocConsumer<TimerListCubit, TimerListState>(
+                  listener: (context, state) {
+                    if (state.status is ErrorStatus) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(S.of(context).anErrorHasOcurred)),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    final timers = state.timers;
+                    if (timers.isEmpty) {
+                      return EmptyListComponent(
+                          message: S.of(context).noTimersYet);
+                    }
+                    return ListView.builder(
+                      itemCount: timers.length + 1,
+                      itemBuilder: (context, index) {
+                        // Spacer to avoid overlapping with FAB.
+                        if (index == timers.length) {
+                          return const SizedBox(height: 64);
+                        }
+                        return Builder(builder: (context) {
+                          final timerCubit = context.select(
+                              (TimerListCubit c) =>
+                                  c.getTimerCubit(timers[index]));
+                          return TimerTile(
+                            cubit: timerCubit,
+                            key: ValueKey(timers[index]),
+                          );
+                        });
+                      },
                     );
-                  });
-                },
-              );
-            },
+                  },
+                ),
+              ),
+            ],
           ),
           floatingActionButton: Builder(
               builder: (context) => FloatingActionButton(

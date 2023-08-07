@@ -6,8 +6,6 @@ This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In th
 ## TODOs
 
 ### MVP
-- Add analytics and crashlytics
-- Add ads banners.
 - Pass all strings to dictionary.
 - Ensure translations are correct.
 

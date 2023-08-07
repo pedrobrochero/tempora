@@ -40,5 +40,9 @@
         <service
             android:name="de.julianassmann.flutter_background.IsolateHolderService"
             android:exported="false" />
+        <!-- AdMob -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4681771972184072~6577331963"/>
     </application>
 </manifest>
