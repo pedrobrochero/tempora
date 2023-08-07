@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hola, me gustaría comentar algo acerca de la app: "),
         "enterANameForYourTimer":
             MessageLookupByLibrary.simpleMessage("Enter a name for your timer"),
+        "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "isFavorite": MessageLookupByLibrary.simpleMessage("Is favorite"),
         "login": MessageLookupByLibrary.simpleMessage("Ingresar"),
         "loginAsGuest":
@@ -85,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeLapseYesterday": MessageLookupByLibrary.simpleMessage("Ayer"),
         "timerName": MessageLookupByLibrary.simpleMessage("Timer name"),
         "timesStarted": MessageLookupByLibrary.simpleMessage("Times started"),
+        "unfavorite": MessageLookupByLibrary.simpleMessage("Unfavorite"),
         "youHaveNoAccess": MessageLookupByLibrary.simpleMessage(
             "Aún no tienes acceso al sistema, contacta al administrador.")
       };

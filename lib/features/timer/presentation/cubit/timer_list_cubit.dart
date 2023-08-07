@@ -10,6 +10,7 @@ import '../../domain/usecases/create_timer.dart';
 import '../../domain/usecases/delete_timer.dart';
 import '../../domain/usecases/edit_timer.dart';
 import '../../domain/usecases/get_timers.dart';
+import '../../domain/usecases/toggle_timer_favorite.dart';
 import 'timer_cubit.dart';
 
 part 'timer_list_cubit.freezed.dart';
@@ -22,6 +23,7 @@ class TimerListCubit extends Cubit<TimerListState> {
     required this.createTimerUsecase,
     required this.deleteTimerUsecase,
     required this.editTimerUsecase,
+    required this.toggleTimerFavoriteUsecase,
   }) : super(const TimerListState()) {
     getInitialData();
   }
@@ -41,6 +43,10 @@ class TimerListCubit extends Cubit<TimerListState> {
   /// A use case to edit a timer.
   @visibleForTesting
   final EditTimer editTimerUsecase;
+
+  /// A use case to toggle a timer's favorite status.
+  @visibleForTesting
+  final ToggleTimerFavorite toggleTimerFavoriteUsecase;
 
   @override
   Future<void> close() async {
@@ -132,5 +138,16 @@ class TimerListCubit extends Cubit<TimerListState> {
       reverseSorting: isReversed,
       timers: newTimers,
     ));
+  }
+
+  void toggleFavorite(CustomTimer timer) async {
+    (await toggleTimerFavoriteUsecase(timer)).fold(
+      (failure) {
+        emit(state.copyWith(status: const Status.error()));
+      },
+      (_) {
+        getInitialData();
+      },
+    );
   }
 }

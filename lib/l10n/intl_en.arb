@@ -42,5 +42,7 @@
   "name": "Name",
   "duration": "Duration",
   "timesStarted": "Times started",
-  "isFavorite": "Is favorite"
+  "isFavorite": "Is favorite",
+  "unfavorite": "Unfavorite",
+  "favorite": "Favorite"
 }

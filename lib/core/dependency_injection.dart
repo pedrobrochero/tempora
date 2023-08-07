@@ -14,6 +14,7 @@ import '../features/timer/domain/usecases/delete_timer.dart';
 import '../features/timer/domain/usecases/edit_timer.dart';
 import '../features/timer/domain/usecases/get_timers.dart';
 import '../features/timer/domain/usecases/show_notification.dart';
+import '../features/timer/domain/usecases/toggle_timer_favorite.dart';
 import '../features/timer/presentation/cubit/timer_cubit.dart';
 import '../features/timer/presentation/cubit/timer_list_cubit.dart';
 import 'data/datasources/timers_sqlite_db.dart';
@@ -33,6 +34,7 @@ Future<void> initDI() async {
         createTimerUsecase: sl(),
         deleteTimerUsecase: sl(),
         editTimerUsecase: sl(),
+        toggleTimerFavoriteUsecase: sl(),
       ));
   sl.registerFactoryParam<TimerCubit, CustomTimer, dynamic>(
       (timer, _) => TimerCubit(
@@ -49,7 +51,7 @@ Future<void> initDI() async {
   sl.registerLazySingleton(() => DeleteTimer(repository: sl()));
   sl.registerLazySingleton(() => EditTimer(repository: sl()));
   sl.registerLazySingleton(() => AddToTimerCount(repository: sl()));
-
+  sl.registerLazySingleton(() => ToggleTimerFavorite(repository: sl()));
   // Repos
   sl.registerLazySingleton<TimersRepository>(
     () => TimersRepositoryImpl(sl()),
