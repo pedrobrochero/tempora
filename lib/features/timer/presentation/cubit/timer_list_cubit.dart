@@ -76,11 +76,13 @@ class TimerListCubit extends Cubit<TimerListState> {
     );
   }
 
-  void editTimer(CustomTimer timer) async {
-    final either = await editTimerUsecase(timer);
+  void editTimer(EditTimerParams params) async {
+    final either = await editTimerUsecase(params);
     either.fold(
       (failure) => emit(state.copyWith(status: const Status.error())),
       (_) {
+        final timer =
+            state.timers.firstWhere((element) => element.id == params.id);
         removeTimerCubit(timer);
         getInitialData();
       },
@@ -124,14 +126,15 @@ class TimerListCubit extends Cubit<TimerListState> {
         newTimers = [...state.timers];
         newTimers.sort((a, b) => a.duration.compareTo(b.duration));
         break;
-      // case TimerSorting.timesStarted:
-      //   state.timers.sort((a, b) => a.timesStarted.compareTo(b.timesStarted));
-      //   break;
-      // case TimerSorting.isFavorite:
-      //   state.timers.sort((a, b) => a.isFavorite.compareTo(b.isFavorite));
-      // break;
-      default:
-        newTimers = state.timers;
+      // TODO(pedrobrochero): Test this one.
+      case TimerSorting.timesStarted:
+        newTimers = [...state.timers];
+        newTimers.sort((a, b) => a.timesStarted.compareTo(b.timesStarted));
+        break;
+      case TimerSorting.isFavorite:
+        newTimers = [...state.timers];
+        newTimers.sort((a, b) =>
+            (a.isFavorite == b.isFavorite ? 0 : (b.isFavorite ? 1 : -1)));
         break;
     }
     if (isReversed) {

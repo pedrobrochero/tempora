@@ -2,6 +2,8 @@ import 'dart:async';
 
 import '../../../../core/data/datasources/timers_sqlite_db.dart';
 import '../../domain/entities/custom_timer.dart';
+import '../../domain/usecases/create_timer.dart';
+import '../../domain/usecases/edit_timer.dart';
 import '../models/custom_timer_model.dart';
 
 /// A data source for timers.
@@ -10,13 +12,16 @@ abstract class TimersLocalDataSource {
   Future<List<CustomTimer>> getTimers();
 
   /// Creates a new [CustomTimer] in the database.
-  Future<void> createTimer(CustomTimer timer);
+  Future<void> createTimer({
+    required String id,
+    required CreateTimerParams params,
+  });
 
   /// Deletes a timer with the given [id].
   Future<void> deleteTimer(String id);
 
   /// Edits a [CustomTimer] in the database.
-  Future<void> editTimer(CustomTimer timer);
+  Future<void> editTimer(EditTimerParams params);
 }
 
 class TimersLocalDataSourceImpl implements TimersLocalDataSource {
@@ -33,11 +38,19 @@ class TimersLocalDataSourceImpl implements TimersLocalDataSource {
   }
 
   @override
-  Future<void> createTimer(CustomTimer timer) async {
+  Future<void> createTimer({
+    required String id,
+    required CreateTimerParams params,
+  }) async {
     final db = await sqliteProvider.database;
+    final model = CustomTimerModel(
+      id: id,
+      name: params.name,
+      duration: params.duration,
+    );
     await db.insert(
       TimersTable.tableName,
-      CustomTimerModel.fromEntity(timer).toJson(),
+      model.toJson(),
     );
   }
 
@@ -52,13 +65,29 @@ class TimersLocalDataSourceImpl implements TimersLocalDataSource {
   }
 
   @override
-  Future<void> editTimer(CustomTimer timer) async {
+  Future<void> editTimer(EditTimerParams params) async {
     final db = await sqliteProvider.database;
+    // Using the model to convert duration and bool to json.
+    final jsonModel = CustomTimerModel(
+      id: params.id,
+      name: params.name ?? '',
+      duration: params.duration ?? Duration.zero,
+      isFavorite: params.isFavorite ?? false,
+      timesStarted: params.timesStarted ?? 0,
+    ).toJson();
     await db.update(
       TimersTable.tableName,
-      CustomTimerModel.fromEntity(timer).toJson(),
+      {
+        if (params.name != null) TimersTable.name: params.name,
+        if (params.duration != null)
+          TimersTable.duration: jsonModel['duration'],
+        if (params.isFavorite != null)
+          TimersTable.isFavorite: jsonModel['isFavorite'],
+        if (params.timesStarted != null)
+          TimersTable.timesStarted: params.timesStarted,
+      },
       where: '${TimersTable.id} = ?',
-      whereArgs: [timer.id],
+      whereArgs: [params.id],
     );
   }
 }

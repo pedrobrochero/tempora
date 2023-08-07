@@ -163,7 +163,7 @@ class _$_TimerListState implements _TimerListState {
       {this.status = const Status.loading(),
       final List<CustomTimer> timers = const [],
       final List<TimerCubit> timersCubits = const [],
-      this.sorting = TimerSorting.name,
+      this.sorting = TimerSorting.isFavorite,
       this.reverseSorting = false})
       : _timers = timers,
         _timersCubits = timersCubits;

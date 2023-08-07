@@ -54,9 +54,18 @@ class TimerTile extends StatelessWidget {
                 ],
               ),
               child: ListTile(
-                title: Text(
-                  cubit.timer.name,
-                  style: context.textTheme.labelSmall,
+                title: Row(
+                  children: [
+                    if (cubit.timer.isFavorite) ...[
+                      Icon(Icons.star,
+                          size: 16, color: context.colorScheme.primary),
+                      const SizedBox(width: 8),
+                    ],
+                    Text(
+                      cubit.timer.name,
+                      style: context.textTheme.labelSmall,
+                    ),
+                  ],
                 ),
                 subtitle: BlocSelector<TimerCubit, TimerState, String>(
                   selector: (state) => state.clockTime,
@@ -85,7 +94,7 @@ class TimerTile extends StatelessWidget {
 
   void editTimer(BuildContext context) async {
     final result = await showEditTimerForm(context, cubit.timer);
-    if (result != null && !result.isEquivalentTo(cubit.timer)) {
+    if (result != null) {
       context.read<TimerListCubit>().editTimer(result);
     }
   }

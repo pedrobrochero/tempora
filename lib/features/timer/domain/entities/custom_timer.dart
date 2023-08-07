@@ -8,17 +8,33 @@ class CustomTimer extends Equatable {
     required this.id,
     required this.name,
     required this.duration,
+    required this.isFavorite,
+    required this.timesStarted,
   });
 
+  /// Timer unique identifier.
   final String id;
+
+  /// Timer name.
   final String name;
+
+  /// Timer duration.
   final Duration duration;
 
-  @override
-  List<Object?> get props => [id, name, duration.inSeconds];
+  /// If the timer is favorite.
+  final bool isFavorite;
 
-  bool isEquivalentTo(CustomTimer other) =>
-      id == other.id && name == other.name && duration == other.duration;
+  /// How many times the timer has been started.
+  final int timesStarted;
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        duration.inSeconds,
+        isFavorite,
+        timesStarted,
+      ];
 }
 
 /// An enum that represents the sorting options for the timers.

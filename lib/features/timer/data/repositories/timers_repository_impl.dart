@@ -5,6 +5,7 @@ import '../../../../core/data/providers/uuid_provider.dart';
 import '../../domain/entities/custom_timer.dart';
 import '../../domain/repositories/timers_repository.dart';
 import '../../domain/usecases/create_timer.dart';
+import '../../domain/usecases/edit_timer.dart';
 import '../datasources/timers_local_data_source.dart';
 
 /// A repository for timers.
@@ -34,12 +35,10 @@ class TimersRepositoryImpl implements TimersRepository {
   @override
   Future<Either<Failure, void>> createTimer(CreateTimerParams params) async {
     try {
-      final timer = CustomTimer(
+      await localDataSource.createTimer(
         id: uuidProvider.v4,
-        name: params.name,
-        duration: params.duration,
+        params: params,
       );
-      await localDataSource.createTimer(timer);
       return const Right(null);
     } catch (e) {
       return Left(UnknownFailure(e));
@@ -59,9 +58,9 @@ class TimersRepositoryImpl implements TimersRepository {
 
   /// Edits a [CustomTimer] in the database.
   @override
-  Future<Either<Failure, void>> editTimer(CustomTimer timer) async {
+  Future<Either<Failure, void>> editTimer(EditTimerParams params) async {
     try {
-      await localDataSource.editTimer(timer);
+      await localDataSource.editTimer(params);
       return const Right(null);
     } catch (e) {
       return Left(UnknownFailure(e));

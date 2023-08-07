@@ -45,6 +45,9 @@ bool? boolFromIntNullable(int? value) {
 // ignore: avoid_positional_boolean_parameters
 int boolToInt(bool value) => value ? 1 : 0;
 
+// ignore: avoid_positional_boolean_parameters
+int boolToIntNullable(bool? value) => value ?? false ? 1 : 0;
+
 //! Lists
 
 List<T> listFromString<T>(

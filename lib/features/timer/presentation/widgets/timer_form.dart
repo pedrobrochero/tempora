@@ -9,13 +9,13 @@ import '../../../../generated/l10n.dart';
 import '../../data/datasources/fake_data_source.dart';
 import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/create_timer.dart';
+import '../../domain/usecases/edit_timer.dart';
 import '../cubit/timer_form_cubit.dart';
 
 /// A form for creating a new timer.
-class TimerForm extends StatelessWidget {
-  const TimerForm({
+class _TimerForm extends StatelessWidget {
+  const _TimerForm({
     this.timer,
-    super.key,
   });
 
   /// The timer to edit, if any.
@@ -31,10 +31,12 @@ class TimerForm extends StatelessWidget {
           listener: (context, state) {
             if (state.status is SuccessStatus) {
               final params = isEditing
-                  ? CustomTimer(
+                  ? EditTimerParams(
                       id: timer!.id,
-                      name: state.name,
-                      duration: state.duration,
+                      name: timer!.name == state.name ? null : state.name,
+                      duration: timer!.duration == state.duration
+                          ? null
+                          : state.duration,
                     )
                   : CreateTimerParams(
                       name: state.name,
@@ -222,7 +224,7 @@ class _TimeInputState extends State<TimeInput> {
 Future<CreateTimerParams?> showCreateTimerForm(BuildContext context) async {
   final params = await showModalBottomSheet<CreateTimerParams>(
       context: context,
-      builder: (context) => const TimerForm(),
+      builder: (context) => const _TimerForm(),
       clipBehavior: Clip.antiAlias,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -235,15 +237,14 @@ Future<CreateTimerParams?> showCreateTimerForm(BuildContext context) async {
 /// form.
 ///
 /// Returns null if the user cancels the form.
-Future<CustomTimer?>? showEditTimerForm(
-    BuildContext context, CustomTimer timer) async {
-  final params = await showModalBottomSheet<CustomTimer>(
+Future<EditTimerParams?> showEditTimerForm(
+        BuildContext context, CustomTimer timer) =>
+    showModalBottomSheet<EditTimerParams>(
       context: context,
-      builder: (context) => TimerForm(timer: timer),
+      builder: (context) => _TimerForm(timer: timer),
       clipBehavior: Clip.antiAlias,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      isScrollControlled: true);
-  return params;
-}
+      isScrollControlled: true,
+    );
