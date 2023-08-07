@@ -10,6 +10,7 @@ This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In th
 - Ensure translations are correct.
 
 ### Others
+- Control timer-ended sound from MediaPlayer.
 - Clear code TODOs.
 - Login and sync timers.
 - No-ads version.
