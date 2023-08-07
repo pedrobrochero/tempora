@@ -64,4 +64,19 @@ enum TimerSorting {
         return S.current.isFavorite;
     }
   }
+
+  /// Returns the sorting function for the sorting option.
+  int Function(CustomTimer a, CustomTimer b) get sortingFunction {
+    switch (this) {
+      case TimerSorting.name:
+        return (a, b) => a.name.compareTo(b.name);
+      case TimerSorting.duration:
+        return (a, b) => a.duration.compareTo(b.duration);
+      case TimerSorting.timesStarted:
+        return (a, b) => b.timesStarted.compareTo(a.timesStarted);
+      case TimerSorting.isFavorite:
+        return (a, b) =>
+            (a.isFavorite == b.isFavorite ? 0 : (b.isFavorite ? 1 : -1));
+    }
+  }
 }

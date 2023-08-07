@@ -51,10 +51,12 @@ class TimerListCubit extends Cubit<TimerListState> {
   void getInitialData() async {
     (await getTimersUsecase(const NoParams())).fold(
       (failure) => emit(state.copyWith(status: const Status.error())),
-      (timers) => emit(state.copyWith(
-        timers: timers,
-        status: const Status.loaded(),
-      )),
+      (timers) => emit(
+        state.copyWith(
+          timers: timers.sorted(state.sorting.sortingFunction),
+          status: const Status.loaded(),
+        ),
+      ),
     );
   }
 
@@ -115,27 +117,10 @@ class TimerListCubit extends Cubit<TimerListState> {
   /// Sorts the timers by a given [TimerSorting]. If the [TimerSorting] is the
   /// same as the current one, it will reverse the order.
   void sort(TimerSorting result) {
-    List<CustomTimer> newTimers;
+    var newTimers =
+        <CustomTimer>[...state.timers].sorted(result.sortingFunction);
+
     final isReversed = state.sorting == result && !state.reverseSorting;
-    switch (result) {
-      case TimerSorting.name:
-        newTimers = [...state.timers];
-        newTimers.sort((a, b) => a.name.compareTo(b.name));
-        break;
-      case TimerSorting.duration:
-        newTimers = [...state.timers];
-        newTimers.sort((a, b) => a.duration.compareTo(b.duration));
-        break;
-      case TimerSorting.timesStarted:
-        newTimers = [...state.timers];
-        newTimers.sort((a, b) => b.timesStarted.compareTo(a.timesStarted));
-        break;
-      case TimerSorting.isFavorite:
-        newTimers = [...state.timers];
-        newTimers.sort((a, b) =>
-            (a.isFavorite == b.isFavorite ? 0 : (b.isFavorite ? 1 : -1)));
-        break;
-    }
     if (isReversed) {
       newTimers = newTimers.reversed.toList();
     }
