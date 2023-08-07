@@ -6,17 +6,14 @@ This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In th
 ## TODOs
 
 ### MVP
-- Add favorite field for [CustomTimer].
-- Add timesStarted field for [CustomTimer].
-- Add sorting to timers list.
+- Add analytics and crashlytics
 - Add ads banners.
-- Clear code TODOs.
-- Ensure dictionaries are correct.
+- Pass all strings to dictionary.
+- Ensure translations are correct.
 
 ### Others
+- Clear code TODOs.
 - Login and sync timers.
 - No-ads version.
 - Scroll down in list when notification is tapped.
 - Show timer(s) progress(s) in persistent notification.
-- Pass all strings to dictionary
-- Add analytics and crashlytics

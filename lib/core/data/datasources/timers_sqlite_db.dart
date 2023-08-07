@@ -60,5 +60,3 @@ class TimersTable {
     'DROP TABLE temp',
   ];
 }
-
-// TODO(pedrobrochero): Add created_at field.
