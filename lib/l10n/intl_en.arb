@@ -1,5 +1,6 @@
 {
-  "appName": "Flutter base",
+  "appName": "Tempora",
+  "rateApp": "Rate this app",
   "confirm": "Confirmar",
   "cancel": "Cancelar",
   "retry": "Reintentar",
@@ -44,5 +45,8 @@
   "timesStarted": "Times started",
   "isFavorite": "Is favorite",
   "unfavorite": "Unfavorite",
-  "favorite": "Favorite"
+  "favorite": "Favorite",
+  "about": "About",
+  "recommendedApps": "Recommended apps",
+  "supportUsOn": "Support us on {name}"
 }

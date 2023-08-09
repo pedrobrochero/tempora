@@ -1,13 +1,12 @@
 # Tempora
-
-This is a multitimer mobile app. Mainly to test GitHub copilot capacities. In the future, this app will be published on the stores.
-
+This is a multitimer mobile app.
 
 ## TODOs
 
 ### MVP
 - Pass all strings to dictionary.
 - Ensure translations are correct.
+- Obfuscate and upload native symbols to store.
 
 ### Others
 - Control timer-ended sound from MediaPlayer.

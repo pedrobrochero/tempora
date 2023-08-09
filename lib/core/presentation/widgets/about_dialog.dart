@@ -4,32 +4,27 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../generated/l10n.dart';
 
-const _termsOfUseUrl = 'https://evolucionass.com/flutter_base-terms-of-use/';
 const _privacyPolicyUrl =
-    'https://evolucionass.com/flutter_base-privacy-policy/';
+    'https://evolucionass.com/tempora-app-privacy-policy/';
 const _developerEmail = 'info@evolucionass.com';
-const _emailSubject = 'flutter_base app comment';
-
-// TODO add media licenses
+const _emailSubject = 'Tempora app comment';
 
 Future<void> showAppAboutDialog(BuildContext context) async {
   final version = (await PackageInfo.fromPlatform()).version;
   final year = DateTime.now().year;
   showAboutDialog(
     context: context,
-    applicationIcon: Image.asset('assets/logo.png'),
+    applicationIcon: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: SizedBox(
+        height: 36,
+        width: 36,
+        child: Image.asset('assets/logo_no_padding.png'),
+      ),
+    ),
     applicationVersion: version,
     applicationLegalese: S.of(context).copyright(year),
     children: [
-      const SizedBox(height: 16),
-      GestureDetector(
-        child: Text(S.of(context).termsOfUse,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  decoration: TextDecoration.underline,
-                  color: Colors.blue,
-                )),
-        onTap: () => launchUrl(Uri.parse(_termsOfUseUrl)),
-      ),
       const SizedBox(height: 8),
       GestureDetector(
         child: Text(S.of(context).privacyPolicy,

@@ -50,11 +50,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Flutter base`
+  /// `Tempora`
   String get appName {
     return Intl.message(
-      'Flutter base',
+      'Tempora',
       name: 'appName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate this app`
+  String get rateApp {
+    return Intl.message(
+      'Rate this app',
+      name: 'rateApp',
       desc: '',
       args: [],
     );
@@ -507,6 +517,36 @@ class S {
       name: 'favorite',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommended apps`
+  String get recommendedApps {
+    return Intl.message(
+      'Recommended apps',
+      name: 'recommendedApps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support us on {name}`
+  String supportUsOn(Object name) {
+    return Intl.message(
+      'Support us on $name',
+      name: 'supportUsOn',
+      desc: '',
+      args: [name],
     );
   }
 }

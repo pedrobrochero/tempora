@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<ForegroundServiceCubit>(),
       child: MaterialApp.router(
-        title: 'Flutter Demo',
+        title: 'Tempora',
         theme: appTheme,
         localizationsDelegates: const [
           S.delegate,

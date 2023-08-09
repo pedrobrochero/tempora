@@ -44,5 +44,6 @@
   "timesStarted": "Times started",
   "isFavorite": "Is favorite",
   "unfavorite": "Unfavorite",
-  "favorite": "Favorite"
+  "favorite": "Favorite",
+  "recommendedApps": "Recommended apps"
 }

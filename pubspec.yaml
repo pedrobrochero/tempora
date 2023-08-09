@@ -15,6 +15,7 @@ dependencies:
   collection: ^1.17.1
   dartz: ^0.10.1
   equatable: ^2.0.5
+  firebase_analytics: ^10.4.4
   firebase_core: ^2.13.0
   firebase_crashlytics: ^3.3.1
   flutter:
@@ -28,6 +29,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   get_it: ^7.6.0
   google_mobile_ads: ^3.0.0
+  in_app_review: ^2.0.6
   intl: ^0.18.0
   json_annotation: ^4.8.1
   package_info_plus: ^4.0.1
@@ -53,9 +55,8 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
 
 flutter_icons:
   android: true

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/control_classes/status.dart';
 import '../../../../core/dependency_injection.dart';
 import '../../../../core/presentation/utils/context_extension.dart';
+import '../../../../core/presentation/widgets/custom_drawer.dart';
 import '../../../../core/presentation/widgets/empty_list_component.dart';
 import '../../../../core/presentation/widgets/my_banner.dart';
 import '../../../../generated/l10n.dart';
@@ -72,6 +73,7 @@ class TimerListPage extends StatelessWidget {
               ),
             ],
           ),
+          drawer: const CustomDrawer(),
           body: Column(
             children: [
               const MyBanner(mainPageBannerAdUnitId),

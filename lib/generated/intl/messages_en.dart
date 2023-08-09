@@ -23,15 +23,18 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(year) =>
       "©${year} Evoluciona Soluciones de Software - Reservados todos los derechos";
 
-  static String m1(n) => "Hace ${n} días";
+  static String m1(name) => "Support us on ${name}";
 
-  static String m2(n) => "En ${n} días";
+  static String m2(n) => "Hace ${n} días";
+
+  static String m3(n) => "En ${n} días";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "anErrorHasOcurred":
             MessageLookupByLibrary.simpleMessage("Ha ocurrido un error."),
-        "appName": MessageLookupByLibrary.simpleMessage("Flutter base"),
+        "appName": MessageLookupByLibrary.simpleMessage("Tempora"),
         "attention": MessageLookupByLibrary.simpleMessage("Atención"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
@@ -72,15 +75,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Por favor espere..."),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Política de privacidad"),
+        "rateApp": MessageLookupByLibrary.simpleMessage("Rate this app"),
+        "recommendedApps":
+            MessageLookupByLibrary.simpleMessage("Recommended apps"),
         "retry": MessageLookupByLibrary.simpleMessage("Reintentar"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "seconds": MessageLookupByLibrary.simpleMessage("Seconds"),
         "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
         "sortBy": MessageLookupByLibrary.simpleMessage("Sort by"),
+        "supportUsOn": m1,
         "termsOfUse":
             MessageLookupByLibrary.simpleMessage("Condiciones de uso"),
-        "timeLapseDaysAgo": m1,
-        "timeLapseDaysLater": m2,
+        "timeLapseDaysAgo": m2,
+        "timeLapseDaysLater": m3,
         "timeLapseToday": MessageLookupByLibrary.simpleMessage("Hoy"),
         "timeLapseTomorrow": MessageLookupByLibrary.simpleMessage("Mañana"),
         "timeLapseYesterday": MessageLookupByLibrary.simpleMessage("Ayer"),
