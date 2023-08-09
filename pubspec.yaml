@@ -42,6 +42,7 @@ dev_dependencies:
   faker: ^2.1.0
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.3.1
   flutter_test:
     sdk: flutter
   freezed: ^2.3.4
@@ -68,3 +69,22 @@ flutter_intl:
   enabled: true
   main_locale: en
   class_name: S
+
+# flutter pub run flutter_native_splash:create
+# To restore Flutter's default white splash screen, run the following command in the terminal:
+# flutter pub run flutter_native_splash:remove
+flutter_native_splash:
+  color: "#000000" 
+  image: assets/launcher_icon/foreground.png
+
+  branding: "assets/launcher_icon/branding_dark.png"
+
+  android_12:
+    color: "#000000" 
+    image: assets/launcher_icon/foreground.png
+
+  # The android, ios and web parameters can be used to disable generating a splash screen on a given
+  # platform.
+  android: true
+  ios: false
+  web: false
