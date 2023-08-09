@@ -4,8 +4,6 @@ This is a multitimer mobile app.
 ## TODOs
 
 ### MVP
-- Pass all strings to dictionary.
-- Ensure translations are correct.
 - Obfuscate and upload native symbols to store.
 
 ### Others

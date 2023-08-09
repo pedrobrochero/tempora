@@ -70,250 +70,240 @@ class S {
     );
   }
 
-  /// `Confirmar`
+  /// `Confirm`
   String get confirm {
     return Intl.message(
-      'Confirmar',
+      'Confirm',
       name: 'confirm',
       desc: '',
       args: [],
     );
   }
 
-  /// `Cancelar`
+  /// `Cancel`
   String get cancel {
     return Intl.message(
-      'Cancelar',
+      'Cancel',
       name: 'cancel',
       desc: '',
       args: [],
     );
   }
 
-  /// `Reintentar`
+  /// `Retry`
   String get retry {
     return Intl.message(
-      'Reintentar',
+      'Retry',
       name: 'retry',
       desc: '',
       args: [],
     );
   }
 
-  /// `Atención`
+  /// `Attention`
   String get attention {
     return Intl.message(
-      'Atención',
+      'Attention',
       name: 'attention',
       desc: '',
       args: [],
     );
   }
 
-  /// `Por favor espere...`
+  /// `Please wait...`
   String get pleaseWait {
     return Intl.message(
-      'Por favor espere...',
+      'Please wait...',
       name: 'pleaseWait',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ups, no hay nada por aqui aun...`
+  /// `Oops, there's nothing here yet...`
   String get nothingToShow {
     return Intl.message(
-      'Ups, no hay nada por aqui aun...',
+      'Oops, there\'s nothing here yet...',
       name: 'nothingToShow',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ha ocurrido un error.`
+  /// `An error has ocurred.`
   String get anErrorHasOcurred {
     return Intl.message(
-      'Ha ocurrido un error.',
+      'An error has ocurred.',
       name: 'anErrorHasOcurred',
       desc: '',
       args: [],
     );
   }
 
-  /// `©{year} Evoluciona Soluciones de Software - Reservados todos los derechos`
+  /// `©{year} Evoluciona Soluciones de Software. All rights reserved.`
   String copyright(Object year) {
     return Intl.message(
-      '©$year Evoluciona Soluciones de Software - Reservados todos los derechos',
+      '©$year Evoluciona Soluciones de Software. All rights reserved.',
       name: 'copyright',
       desc: '',
       args: [year],
     );
   }
 
-  /// `Condiciones de uso`
+  /// `Terms of use`
   String get termsOfUse {
     return Intl.message(
-      'Condiciones de uso',
+      'Terms of use',
       name: 'termsOfUse',
       desc: '',
       args: [],
     );
   }
 
-  /// `Política de privacidad`
+  /// `Privacy policy`
   String get privacyPolicy {
     return Intl.message(
-      'Política de privacidad',
+      'Privacy policy',
       name: 'privacyPolicy',
       desc: '',
       args: [],
     );
   }
 
-  /// `Contacta al desarrollador`
+  /// `Contact developer`
   String get contactDeveloper {
     return Intl.message(
-      'Contacta al desarrollador',
+      'Contact developer',
       name: 'contactDeveloper',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hola, me gustaría comentar algo acerca de la app: `
+  /// `Hi, I would like to comment something about the app: \n`
   String get emailToDeveloperBody {
     return Intl.message(
-      'Hola, me gustaría comentar algo acerca de la app: ',
+      'Hi, I would like to comment something about the app: \n',
       name: 'emailToDeveloperBody',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hoy`
+  /// `Today`
   String get timeLapseToday {
     return Intl.message(
-      'Hoy',
+      'Today',
       name: 'timeLapseToday',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hace {n} días`
+  /// `{n} days ago`
   String timeLapseDaysAgo(Object n) {
     return Intl.message(
-      'Hace $n días',
+      '$n days ago',
       name: 'timeLapseDaysAgo',
       desc: '',
       args: [n],
     );
   }
 
-  /// `En {n} días`
+  /// `In {n} days`
   String timeLapseDaysLater(Object n) {
     return Intl.message(
-      'En $n días',
+      'In $n days',
       name: 'timeLapseDaysLater',
       desc: '',
       args: [n],
     );
   }
 
-  /// `Mañana`
+  /// `Tomorrow`
   String get timeLapseTomorrow {
     return Intl.message(
-      'Mañana',
+      'Tomorrow',
       name: 'timeLapseTomorrow',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ayer`
+  /// `Yesterday`
   String get timeLapseYesterday {
     return Intl.message(
-      'Ayer',
+      'Yesterday',
       name: 'timeLapseYesterday',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ajustes`
+  /// `Settings`
   String get settings {
     return Intl.message(
-      'Ajustes',
+      'Settings',
       name: 'settings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ingresar como invitado`
+  /// `Login as guest`
   String get loginAsGuest {
     return Intl.message(
-      'Ingresar como invitado',
+      'Login as guest',
       name: 'loginAsGuest',
       desc: '',
       args: [],
     );
   }
 
-  /// `Correo`
+  /// `email`
   String get email {
     return Intl.message(
-      'Correo',
+      'email',
       name: 'email',
       desc: '',
       args: [],
     );
   }
 
-  /// `Contraseña`
+  /// `password`
   String get password {
     return Intl.message(
-      'Contraseña',
+      'password',
       name: 'password',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ingresar`
+  /// `Login`
   String get login {
     return Intl.message(
-      'Ingresar',
+      'Login',
       name: 'login',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ingresar con Google`
+  /// `Login with Google`
   String get loginWithGoogle {
     return Intl.message(
-      'Ingresar con Google',
+      'Login with Google',
       name: 'loginWithGoogle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aún no tienes acceso al sistema, contacta al administrador.`
-  String get youHaveNoAccess {
-    return Intl.message(
-      'Aún no tienes acceso al sistema, contacta al administrador.',
-      name: 'youHaveNoAccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cerrar sesión`
+  /// `Logout`
   String get logout {
     return Intl.message(
-      'Cerrar sesión',
+      'Logout',
       name: 'logout',
       desc: '',
       args: [],

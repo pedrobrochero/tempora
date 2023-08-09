@@ -21,7 +21,9 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
   static String m0(year) =>
-      "©${year} Evoluciona Soluciones de Software - Reservados todos los derechos";
+      "©${year} Evoluciona Soluciones de Software - Todos los derechos reservados";
+
+  static String m1(name) => "Apóyanos en ${name}";
 
   static String m2(n) => "Hace ${n} días";
 
@@ -29,42 +31,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("Acerca de"),
         "anErrorHasOcurred":
             MessageLookupByLibrary.simpleMessage("Ha ocurrido un error."),
-        "appName": MessageLookupByLibrary.simpleMessage("Flutter base"),
+        "appName": MessageLookupByLibrary.simpleMessage("Tempora"),
         "attention": MessageLookupByLibrary.simpleMessage("Atención"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "contactDeveloper":
             MessageLookupByLibrary.simpleMessage("Contacta al desarrollador"),
         "copyright": m0,
-        "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "create": MessageLookupByLibrary.simpleMessage("Crear"),
         "createTimer":
-            MessageLookupByLibrary.simpleMessage("Create a new timer"),
-        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+            MessageLookupByLibrary.simpleMessage("Crear un nuevo temporizador"),
+        "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
         "deleteTimerQuestion": MessageLookupByLibrary.simpleMessage(
-            "Are you sure you want to delete this timer?"),
-        "duration": MessageLookupByLibrary.simpleMessage("Duration"),
-        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
-        "editTimer": MessageLookupByLibrary.simpleMessage("Edit timer"),
+            "¿Seguro que deseas eliminar este temporizador?"),
+        "duration": MessageLookupByLibrary.simpleMessage("Duración"),
+        "edit": MessageLookupByLibrary.simpleMessage("Editar"),
+        "editTimer":
+            MessageLookupByLibrary.simpleMessage("Editar temporizador"),
         "email": MessageLookupByLibrary.simpleMessage("Correo"),
         "emailToDeveloperBody": MessageLookupByLibrary.simpleMessage(
-            "Hola, me gustaría comentar algo acerca de la app: "),
-        "enterANameForYourTimer":
-            MessageLookupByLibrary.simpleMessage("Enter a name for your timer"),
-        "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
-        "isFavorite": MessageLookupByLibrary.simpleMessage("Is favorite"),
+            "Hola, me gustaría comentar algo acerca de la app: \n"),
+        "enterANameForYourTimer": MessageLookupByLibrary.simpleMessage(
+            "Ingresa un nombre para tu temporizador"),
+        "favorite": MessageLookupByLibrary.simpleMessage("Favorito"),
+        "isFavorite": MessageLookupByLibrary.simpleMessage("Es favorito"),
         "login": MessageLookupByLibrary.simpleMessage("Ingresar"),
         "loginAsGuest":
             MessageLookupByLibrary.simpleMessage("Ingresar como invitado"),
         "loginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Ingresar con Google"),
         "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
-        "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
-        "myTimers": MessageLookupByLibrary.simpleMessage("My timers"),
-        "name": MessageLookupByLibrary.simpleMessage("Name"),
-        "noTimersYet":
-            MessageLookupByLibrary.simpleMessage("No timers yet. Create one!"),
+        "minutes": MessageLookupByLibrary.simpleMessage("Minutos"),
+        "myTimers": MessageLookupByLibrary.simpleMessage("Mis temporizadores"),
+        "name": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "noTimersYet": MessageLookupByLibrary.simpleMessage(
+            "Aún no hay temporizadores.\n¡Crea el primero!"),
         "nothingToShow": MessageLookupByLibrary.simpleMessage(
             "Ups, no hay nada por aqui aun..."),
         "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
@@ -72,13 +76,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Por favor espere..."),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Política de privacidad"),
+        "rateApp": MessageLookupByLibrary.simpleMessage("Califica esta app"),
         "recommendedApps":
-            MessageLookupByLibrary.simpleMessage("Recommended apps"),
+            MessageLookupByLibrary.simpleMessage("Apps recomendadas"),
         "retry": MessageLookupByLibrary.simpleMessage("Reintentar"),
-        "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
-        "seconds": MessageLookupByLibrary.simpleMessage("Seconds"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Guardar cambios"),
+        "seconds": MessageLookupByLibrary.simpleMessage("Segundos"),
         "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
-        "sortBy": MessageLookupByLibrary.simpleMessage("Sort by"),
+        "sortBy": MessageLookupByLibrary.simpleMessage("Ordenar por"),
+        "supportUsOn": m1,
         "termsOfUse":
             MessageLookupByLibrary.simpleMessage("Condiciones de uso"),
         "timeLapseDaysAgo": m2,
@@ -86,10 +92,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeLapseToday": MessageLookupByLibrary.simpleMessage("Hoy"),
         "timeLapseTomorrow": MessageLookupByLibrary.simpleMessage("Mañana"),
         "timeLapseYesterday": MessageLookupByLibrary.simpleMessage("Ayer"),
-        "timerName": MessageLookupByLibrary.simpleMessage("Timer name"),
-        "timesStarted": MessageLookupByLibrary.simpleMessage("Times started"),
-        "unfavorite": MessageLookupByLibrary.simpleMessage("Unfavorite"),
-        "youHaveNoAccess": MessageLookupByLibrary.simpleMessage(
-            "Aún no tienes acceso al sistema, contacta al administrador.")
+        "timerName":
+            MessageLookupByLibrary.simpleMessage("Nombre del temporizador"),
+        "timesStarted": MessageLookupByLibrary.simpleMessage("Veces iniciado"),
+        "unfavorite": MessageLookupByLibrary.simpleMessage("No favorito")
       };
 }
