@@ -32,7 +32,9 @@ class TimerTile extends StatelessWidget {
               border: Border.all(
                   color: state.isRunning
                       ? Theme.of(context).colorScheme.primary
-                      : Colors.transparent,
+                      : state.isPaused
+                          ? Colors.amber
+                          : Colors.transparent,
                   width: 2),
             ),
             child: Slidable(

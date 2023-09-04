@@ -17,6 +17,9 @@ class TimerState with _$TimerState {
   /// Returns true if the timer has finished.
   bool get isFinished => status == TimerStatus.finished;
 
+  /// Returns true if the timer is paused.
+  bool get isPaused => status == TimerStatus.paused;
+
   TimerStatus get status {
     if (remainingSeconds <= 0) {
       return TimerStatus.finished;
