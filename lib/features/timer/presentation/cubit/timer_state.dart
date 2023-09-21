@@ -6,7 +6,7 @@ class TimerState with _$TimerState {
   const factory TimerState({
     required Duration duration,
     required int remainingSeconds,
-    Timer? timer,
+    Timer? ticker,
   }) = _Initial;
 
   const TimerState._();
@@ -23,7 +23,7 @@ class TimerState with _$TimerState {
   TimerStatus get status {
     if (remainingSeconds <= 0) {
       return TimerStatus.finished;
-    } else if (timer != null) {
+    } else if (ticker != null) {
       return TimerStatus.running;
     } else if (remainingSeconds == duration.inSeconds) {
       return TimerStatus.initial;

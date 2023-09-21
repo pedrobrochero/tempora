@@ -38,38 +38,41 @@ class TimerTile extends StatelessWidget {
                   width: 2),
             ),
             child: Slidable(
-              startActionPane: ActionPane(
-                extentRatio: 0.9,
-                motion: const ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    flex: 6,
-                    onPressed: (_) => deleteTimer(context),
-                    backgroundColor: Colors.red.shade900,
-                    icon: Icons.delete,
-                    label: S.of(context).delete,
-                  ),
-                  SlidableAction(
-                    flex: 6,
-                    onPressed: (_) => editTimer(context),
-                    backgroundColor: Colors.orange.shade900,
-                    icon: Icons.edit,
-                    label: S.of(context).edit,
-                  ),
-                  SlidableAction(
-                    flex: 7,
-                    onPressed: (_) => context
-                        .read<TimerListCubit>()
-                        .toggleFavorite(cubit.timer),
-                    backgroundColor: Colors.black,
-                    icon:
-                        cubit.timer.isFavorite ? Icons.star_border : Icons.star,
-                    label: cubit.timer.isFavorite
-                        ? S.of(context).unfavorite
-                        : S.of(context).favorite,
-                  ),
-                ],
-              ),
+              startActionPane: cubit.state.status != TimerStatus.initial
+                  ? null
+                  : ActionPane(
+                      extentRatio: 0.9,
+                      motion: const ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          flex: 6,
+                          onPressed: (_) => deleteTimer(context),
+                          backgroundColor: Colors.red.shade900,
+                          icon: Icons.delete,
+                          label: S.of(context).delete,
+                        ),
+                        SlidableAction(
+                          flex: 6,
+                          onPressed: (_) => editTimer(context),
+                          backgroundColor: Colors.orange.shade900,
+                          icon: Icons.edit,
+                          label: S.of(context).edit,
+                        ),
+                        SlidableAction(
+                          flex: 7,
+                          onPressed: (_) => context
+                              .read<TimerListCubit>()
+                              .toggleFavorite(cubit.timer),
+                          backgroundColor: Colors.black,
+                          icon: cubit.timer.isFavorite
+                              ? Icons.star_border
+                              : Icons.star,
+                          label: cubit.timer.isFavorite
+                              ? S.of(context).unfavorite
+                              : S.of(context).favorite,
+                        ),
+                      ],
+                    ),
               child: ListTile(
                 title: Row(
                   children: [

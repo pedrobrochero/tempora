@@ -48,9 +48,12 @@ class TimerListCubit extends Cubit<TimerListState> {
   @visibleForTesting
   final ToggleTimerFavorite toggleTimerFavoriteUsecase;
 
+  /// A list of [TimerCubit]s created from [CustomTimer]s in the state.
+  List<TimerCubit> timersCubits = [];
+
   @override
   Future<void> close() async {
-    await Future.wait(state.timersCubits.map((e) => e.close()));
+    await Future.wait(timersCubits.map((e) => e.close()));
     return super.close();
   }
 
@@ -97,27 +100,38 @@ class TimerListCubit extends Cubit<TimerListState> {
     );
   }
 
+  void toggleFavorite(CustomTimer timer) async {
+    (await toggleTimerFavoriteUsecase(timer)).fold(
+      (failure) {
+        emit(state.copyWith(status: const Status.error()));
+      },
+      (_) async {
+        removeTimerCubit(timer);
+        getInitialData();
+      },
+    );
+  }
+
   /// Returns a [TimerCubit] for a given [CustomTimer].
   /// If the [TimerCubit] doesn't exist, it will be created and added to the
   /// [TimerListCubit] state list.
   TimerCubit getTimerCubit(CustomTimer timer) {
-    var cubit = state.timersCubits
-        .firstWhereOrNull((element) => element.timer == timer);
+    var cubit = timersCubits
+        .firstWhereOrNull((element) => element.timer.id == timer.id);
     // If the cubit doesn't exist, create it and add it to the list.
     if (cubit == null) {
       cubit = sl<TimerCubit>(param1: timer);
-      emit(state.copyWith(timersCubits: [...state.timersCubits, cubit]));
+      timersCubits.add(cubit);
     }
     return cubit;
   }
 
   /// Removes a [TimerCubit] from the [TimerListCubit] state list.
   void removeTimerCubit(CustomTimer timer) {
-    final cubit = state.timersCubits
+    final cubit = timersCubits
         .firstWhereOrNull((element) => element.timer.id == timer.id);
     cubit?.close();
-    final newList = List<TimerCubit>.from(state.timersCubits)..remove(cubit);
-    emit(state.copyWith(timersCubits: newList));
+    timersCubits.remove(cubit);
   }
 
   /// Sorts the timers by a given [TimerSorting]. If the [TimerSorting] is the
@@ -138,16 +152,5 @@ class TimerListCubit extends Cubit<TimerListState> {
       reverseSorting: isReversed,
       timers: newTimers,
     ));
-  }
-
-  void toggleFavorite(CustomTimer timer) async {
-    (await toggleTimerFavoriteUsecase(timer)).fold(
-      (failure) {
-        emit(state.copyWith(status: const Status.error()));
-      },
-      (_) {
-        getInitialData();
-      },
-    );
   }
 }

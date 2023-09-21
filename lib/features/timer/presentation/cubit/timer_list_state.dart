@@ -5,7 +5,6 @@ class TimerListState with _$TimerListState {
   const factory TimerListState({
     @Default(Status.loading()) Status status,
     @Default([]) List<CustomTimer> timers,
-    @Default([]) List<TimerCubit> timersCubits,
     @Default(TimerSorting.isFavorite) TimerSorting sorting,
     @Default(false) bool reverseSorting,
   }) = _TimerListState;

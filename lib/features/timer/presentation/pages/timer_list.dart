@@ -17,14 +17,16 @@ import '../widgets/timer_tile.dart';
 
 @RoutePage()
 class TimerListPage extends StatelessWidget {
-  const TimerListPage({Key? key}) : super(key: key);
+  TimerListPage({Key? key}) : super(key: key);
+
+  // It's normal for this bloc to never be closed, as this is a one page
+  // app. This is done because the timersCubits are created, closed and
+  // stored in this cubit, to avoid mess.
+  final timerListCubit = sl<TimerListCubit>();
 
   @override
   Widget build(BuildContext context) => BlocProvider.value(
-        // It's normal for this bloc to never be closed, as this is a one page
-        // app. This is done because the timersCubits are created, closed and
-        // stored in this cubit, to avoid mess.
-        value: sl<TimerListCubit>(),
+        value: timerListCubit,
         child: Scaffold(
           appBar: AppBar(
             title: Text(S.of(context).myTimers),
@@ -101,9 +103,8 @@ class TimerListPage extends StatelessWidget {
                           return const SizedBox(height: 64);
                         }
                         return Builder(builder: (context) {
-                          final timerCubit = context.select(
-                              (TimerListCubit c) =>
-                                  c.getTimerCubit(timers[index]));
+                          final timerCubit =
+                              timerListCubit.getTimerCubit(timers[index]);
                           return TimerTile(
                             cubit: timerCubit,
                             key: ValueKey(timers[index]),

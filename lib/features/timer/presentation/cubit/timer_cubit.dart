@@ -32,7 +32,7 @@ class TimerCubit extends Cubit<TimerState> {
     addToTimerCount(timer);
     emit(
       state.copyWith(
-        timer: Timer.periodic(const Duration(seconds: 1), (timer) {
+        ticker: Timer.periodic(const Duration(seconds: 1), (timer) {
           tick();
         }),
       ),
@@ -45,15 +45,15 @@ class TimerCubit extends Cubit<TimerState> {
       resetTimer();
       return;
     }
-    state.timer?.cancel();
-    emit(state.copyWith(timer: null));
+    state.ticker?.cancel();
+    emit(state.copyWith(ticker: null));
   }
 
   /// Resets the timer to its initial state.
   void resetTimer() {
-    state.timer?.cancel();
+    state.ticker?.cancel();
     emit(state.copyWith(
-      timer: null,
+      ticker: null,
       remainingSeconds: state.duration.inSeconds,
     ));
     clearNotification(timer);
@@ -74,7 +74,7 @@ class TimerCubit extends Cubit<TimerState> {
 
   @override
   Future<void> close() {
-    state.timer?.cancel();
+    state.ticker?.cancel();
     return super.close();
   }
 }

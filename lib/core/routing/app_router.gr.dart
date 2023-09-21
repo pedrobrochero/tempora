@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:flutter/material.dart' as _i4;
 import 'package:tempora/features/dev/dev_page.dart' as _i1;
 import 'package:tempora/features/timer/presentation/pages/timer_list.dart'
     as _i2;
@@ -25,9 +26,11 @@ abstract class $AppRouter extends _i3.RootStackRouter {
       );
     },
     TimerListRoute.name: (routeData) {
+      final args = routeData.argsAs<TimerListRouteArgs>(
+          orElse: () => const TimerListRouteArgs());
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.TimerListPage(),
+        child: _i2.TimerListPage(key: args.key),
       );
     },
   };
@@ -49,14 +52,29 @@ class DevRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.TimerListPage]
-class TimerListRoute extends _i3.PageRouteInfo<void> {
-  const TimerListRoute({List<_i3.PageRouteInfo>? children})
-      : super(
+class TimerListRoute extends _i3.PageRouteInfo<TimerListRouteArgs> {
+  TimerListRoute({
+    _i4.Key? key,
+    List<_i3.PageRouteInfo>? children,
+  }) : super(
           TimerListRoute.name,
+          args: TimerListRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'TimerListRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i3.PageInfo<TimerListRouteArgs> page =
+      _i3.PageInfo<TimerListRouteArgs>(name);
+}
+
+class TimerListRouteArgs {
+  const TimerListRouteArgs({this.key});
+
+  final _i4.Key? key;
+
+  @override
+  String toString() {
+    return 'TimerListRouteArgs{key: $key}';
+  }
 }
