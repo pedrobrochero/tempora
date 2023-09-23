@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ForegroundServiceState {
-  List<CustomTimer> get activeTimers => throw _privateConstructorUsedError;
+  List<String> get activeTimerIds => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ForegroundServiceStateCopyWith<ForegroundServiceState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $ForegroundServiceStateCopyWith<$Res> {
           $Res Function(ForegroundServiceState) then) =
       _$ForegroundServiceStateCopyWithImpl<$Res, ForegroundServiceState>;
   @useResult
-  $Res call({List<CustomTimer> activeTimers});
+  $Res call({List<String> activeTimerIds});
 }
 
 /// @nodoc
@@ -46,13 +46,13 @@ class _$ForegroundServiceStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? activeTimers = null,
+    Object? activeTimerIds = null,
   }) {
     return _then(_value.copyWith(
-      activeTimers: null == activeTimers
-          ? _value.activeTimers
-          : activeTimers // ignore: cast_nullable_to_non_nullable
-              as List<CustomTimer>,
+      activeTimerIds: null == activeTimerIds
+          ? _value.activeTimerIds
+          : activeTimerIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -65,7 +65,7 @@ abstract class _$$_InitialCopyWith<$Res>
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<CustomTimer> activeTimers});
+  $Res call({List<String> activeTimerIds});
 }
 
 /// @nodoc
@@ -78,13 +78,13 @@ class __$$_InitialCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? activeTimers = null,
+    Object? activeTimerIds = null,
   }) {
     return _then(_$_Initial(
-      activeTimers: null == activeTimers
-          ? _value._activeTimers
-          : activeTimers // ignore: cast_nullable_to_non_nullable
-              as List<CustomTimer>,
+      activeTimerIds: null == activeTimerIds
+          ? _value._activeTimerIds
+          : activeTimerIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -92,21 +92,21 @@ class __$$_InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial({final List<CustomTimer> activeTimers = const []})
-      : _activeTimers = activeTimers;
+  const _$_Initial({final List<String> activeTimerIds = const []})
+      : _activeTimerIds = activeTimerIds;
 
-  final List<CustomTimer> _activeTimers;
+  final List<String> _activeTimerIds;
   @override
   @JsonKey()
-  List<CustomTimer> get activeTimers {
-    if (_activeTimers is EqualUnmodifiableListView) return _activeTimers;
+  List<String> get activeTimerIds {
+    if (_activeTimerIds is EqualUnmodifiableListView) return _activeTimerIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_activeTimers);
+    return EqualUnmodifiableListView(_activeTimerIds);
   }
 
   @override
   String toString() {
-    return 'ForegroundServiceState(activeTimers: $activeTimers)';
+    return 'ForegroundServiceState(activeTimerIds: $activeTimerIds)';
   }
 
   @override
@@ -115,12 +115,12 @@ class _$_Initial implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
             const DeepCollectionEquality()
-                .equals(other._activeTimers, _activeTimers));
+                .equals(other._activeTimerIds, _activeTimerIds));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_activeTimers));
+      runtimeType, const DeepCollectionEquality().hash(_activeTimerIds));
 
   @JsonKey(ignore: true)
   @override
@@ -130,10 +130,10 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements ForegroundServiceState {
-  const factory _Initial({final List<CustomTimer> activeTimers}) = _$_Initial;
+  const factory _Initial({final List<String> activeTimerIds}) = _$_Initial;
 
   @override
-  List<CustomTimer> get activeTimers;
+  List<String> get activeTimerIds;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

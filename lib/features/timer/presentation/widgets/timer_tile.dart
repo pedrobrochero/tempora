@@ -140,7 +140,7 @@ class _ResetButton extends StatelessWidget {
   Widget build(BuildContext context) => IconButton(
         onPressed: () {
           context.read<TimerCubit>().resetTimer();
-          context.read<ForegroundServiceCubit>().removeTimer(timer);
+          context.read<ForegroundServiceCubit>().removeTimer(timer.id);
         },
         icon: const Icon(Icons.replay),
       );
@@ -154,7 +154,7 @@ class _StartButton extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
         onPressed: () {
           context.read<TimerCubit>().startTimer();
-          context.read<ForegroundServiceCubit>().addTimer(timer);
+          context.read<ForegroundServiceCubit>().addTimer(timer.id);
         },
         child: const Icon(Icons.play_arrow),
       );
@@ -168,7 +168,7 @@ class _StopButton extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
         onPressed: () {
           context.read<TimerCubit>().pauseTimer();
-          context.read<ForegroundServiceCubit>().removeTimer(timer);
+          context.read<ForegroundServiceCubit>().removeTimer(timer.id);
         },
         child: BlocSelector<TimerCubit, TimerState, bool>(
           selector: (state) => state.isFinished,

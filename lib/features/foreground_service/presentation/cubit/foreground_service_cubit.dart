@@ -17,15 +17,15 @@ class ForegroundServiceCubit extends Cubit<ForegroundServiceState> {
     notificationIcon: AndroidResource(name: 'background_icon'),
   );
 
-  /// Adds a [CustomTimer] to the list of active timers.
+  /// Adds a [CustomTimer] id to the list of active timers.
   /// Enables background service if not already on.
-  void addTimer(CustomTimer timer) async {
+  void addTimer(String timerId) async {
     final success =
         await FlutterBackground.initialize(androidConfig: _androidConfig);
     if (!success) {
       return;
     }
-    emit(state.copyWith(activeTimers: state.activeTimers + [timer]));
+    emit(state.copyWith(activeTimerIds: state.activeTimerIds + [timerId]));
     if (!FlutterBackground.isBackgroundExecutionEnabled) {
       await FlutterBackground.enableBackgroundExecution();
     }
@@ -33,11 +33,11 @@ class ForegroundServiceCubit extends Cubit<ForegroundServiceState> {
 
   /// Removes a [CustomTimer] from the list of active timers.
   /// Disables background service if no active timers remain.
-  void removeTimer(CustomTimer timer) async {
-    final newList = state.activeTimers.toList()..remove(timer);
+  void removeTimer(String timerId) async {
+    final newList = state.activeTimerIds.toList()..remove(timerId);
     if (newList.isEmpty && FlutterBackground.isBackgroundExecutionEnabled) {
       await FlutterBackground.disableBackgroundExecution();
     }
-    emit(state.copyWith(activeTimers: newList));
+    emit(state.copyWith(activeTimerIds: newList));
   }
 }
