@@ -539,6 +539,26 @@ class S {
       args: [name],
     );
   }
+
+  /// `{something} ended`
+  String somethingEnded(Object something) {
+    return Intl.message(
+      '$something ended',
+      name: 'somethingEnded',
+      desc: '',
+      args: [something],
+    );
+  }
+
+  /// `Timer`
+  String get timer {
+    return Intl.message(
+      'Timer',
+      name: 'timer',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

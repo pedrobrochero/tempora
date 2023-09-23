@@ -23,11 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(year) =>
       "©${year} Evoluciona Soluciones de Software - Todos los derechos reservados";
 
-  static String m1(name) => "Apóyanos en ${name}";
+  static String m1(something) => "${something} terminó";
 
-  static String m2(n) => "Hace ${n} días";
+  static String m2(name) => "Apóyanos en ${name}";
 
-  static String m3(n) => "En ${n} días";
+  static String m3(n) => "Hace ${n} días";
+
+  static String m4(n) => "En ${n} días";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -83,15 +85,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveChanges": MessageLookupByLibrary.simpleMessage("Guardar cambios"),
         "seconds": MessageLookupByLibrary.simpleMessage("Segundos"),
         "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
+        "somethingEnded": m1,
         "sortBy": MessageLookupByLibrary.simpleMessage("Ordenar por"),
-        "supportUsOn": m1,
+        "supportUsOn": m2,
         "termsOfUse":
             MessageLookupByLibrary.simpleMessage("Condiciones de uso"),
-        "timeLapseDaysAgo": m2,
-        "timeLapseDaysLater": m3,
+        "timeLapseDaysAgo": m3,
+        "timeLapseDaysLater": m4,
         "timeLapseToday": MessageLookupByLibrary.simpleMessage("Hoy"),
         "timeLapseTomorrow": MessageLookupByLibrary.simpleMessage("Mañana"),
         "timeLapseYesterday": MessageLookupByLibrary.simpleMessage("Ayer"),
+        "timer": MessageLookupByLibrary.simpleMessage("Temporizador"),
         "timerName":
             MessageLookupByLibrary.simpleMessage("Nombre del temporizador"),
         "timesStarted": MessageLookupByLibrary.simpleMessage("Veces iniciado"),

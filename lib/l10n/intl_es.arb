@@ -47,5 +47,7 @@
   "favorite": "Favorito",
   "about": "Acerca de",
   "recommendedApps": "Apps recomendadas",
-  "supportUsOn": "Apóyanos en {name}"
+  "supportUsOn": "Apóyanos en {name}",
+  "somethingEnded": "{something} terminó",
+  "timer": "Temporizador"
 }

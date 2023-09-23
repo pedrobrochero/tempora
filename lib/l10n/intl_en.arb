@@ -47,5 +47,7 @@
   "favorite": "Favorite",
   "about": "About",
   "recommendedApps": "Recommended apps",
-  "supportUsOn": "Support us on {name}"
+  "supportUsOn": "Support us on {name}",
+  "somethingEnded": "{something} ended",
+  "timer": "Timer"
 }
