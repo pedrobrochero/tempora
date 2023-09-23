@@ -100,7 +100,7 @@ class TimerListPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         // Spacer to avoid overlapping with FAB.
                         if (index == timers.length) {
-                          return const SizedBox(height: 64);
+                          return const SizedBox(height: 80);
                         }
                         return Builder(builder: (context) {
                           final timerCubit =

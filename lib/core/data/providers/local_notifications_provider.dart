@@ -65,7 +65,7 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
     // TODO(pedrobrochero): Test this vibration pattern.
     final vibrationPattern = Int64List.fromList([
       0,
-      1000,
+      10000,
       5000,
       2000,
     ]);
@@ -74,12 +74,11 @@ class LocalNotificationsProviderImpl implements LocalNotificationsProvider {
         android: AndroidNotificationDetails(
       androidChannelId,
       androidChannelName,
-      sound: const RawResourceAndroidNotificationSound(
-          'islandy_loop_925bpm_132431'),
       fullScreenIntent: true,
       visibility: NotificationVisibility.public,
       priority: Priority.max,
       importance: Importance.high,
+      playSound: false,
       audioAttributesUsage: AudioAttributesUsage.alarm,
       usesChronometer: true,
       additionalFlags: Int32List.fromList(<int>[

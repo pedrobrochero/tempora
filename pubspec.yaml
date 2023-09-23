@@ -11,6 +11,7 @@ environment:
   flutter: '3.10.1'
 
 dependencies:
+  audioplayers: ^5.1.0
   auto_route: ^7.2.0
   collection: ^1.17.1
   dartz: ^0.10.1
@@ -57,6 +58,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/sounds/
 
 flutter_icons:
   android: true

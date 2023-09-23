@@ -13,6 +13,7 @@ import '../features/timer/domain/usecases/create_timer.dart';
 import '../features/timer/domain/usecases/delete_timer.dart';
 import '../features/timer/domain/usecases/edit_timer.dart';
 import '../features/timer/domain/usecases/get_timers.dart';
+import '../features/timer/domain/usecases/play_timer_sound.dart';
 import '../features/timer/domain/usecases/show_notification.dart';
 import '../features/timer/domain/usecases/toggle_timer_favorite.dart';
 import '../features/timer/presentation/cubit/timer_cubit.dart';
@@ -42,6 +43,7 @@ Future<void> initDI() async {
             showNotification: sl(),
             clearNotification: sl(),
             addToTimerCount: sl(),
+            playTimerSound: sl(),
           ));
   // Usecases
   sl.registerLazySingleton(() => GetTimers(repository: sl()));
@@ -52,6 +54,7 @@ Future<void> initDI() async {
   sl.registerLazySingleton(() => EditTimer(repository: sl()));
   sl.registerLazySingleton(() => AddToTimerCount(repository: sl()));
   sl.registerLazySingleton(() => ToggleTimerFavorite(repository: sl()));
+  sl.registerLazySingleton(() => const PlayTimerSound());
   // Repos
   sl.registerLazySingleton<TimersRepository>(
     () => TimersRepositoryImpl(sl()),

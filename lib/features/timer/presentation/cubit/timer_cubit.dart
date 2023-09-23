@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/add_to_timer_count.dart';
 import '../../domain/usecases/clear_notification.dart';
+import '../../domain/usecases/play_timer_sound.dart';
 import '../../domain/usecases/show_notification.dart';
 
 part 'timer_cubit.freezed.dart';
@@ -18,14 +20,27 @@ class TimerCubit extends Cubit<TimerState> {
     required this.showNotification,
     required this.clearNotification,
     required this.addToTimerCount,
+    required this.playTimerSound,
   }) : super(TimerState(
           duration: timer.duration,
           remainingSeconds: timer.duration.inSeconds,
         ));
   final CustomTimer timer;
+
+  AudioPlayer? player;
+
+  @visibleForTesting
   final ShowNotification showNotification;
+
+  @visibleForTesting
   final ClearNotification clearNotification;
+
+  @visibleForTesting
   final AddToTimerCount addToTimerCount;
+
+  /// The use case to play the timer sound when it ends.
+  @visibleForTesting
+  final PlayTimerSound playTimerSound;
 
   /// Starts the timer.
   void startTimer() async {
@@ -52,6 +67,7 @@ class TimerCubit extends Cubit<TimerState> {
   /// Resets the timer to its initial state.
   void resetTimer() {
     state.ticker?.cancel();
+    player?.stop();
     emit(state.copyWith(
       ticker: null,
       remainingSeconds: state.duration.inSeconds,
@@ -68,13 +84,18 @@ class TimerCubit extends Cubit<TimerState> {
     }
   }
 
-  void onTimerFinished() {
+  void onTimerFinished() async {
     showNotification(timer);
+    (await playTimerSound(player)).fold(
+      (l) => null,
+      (r) => player = r,
+    );
   }
 
   @override
   Future<void> close() {
     state.ticker?.cancel();
+    player?.dispose();
     return super.close();
   }
 }

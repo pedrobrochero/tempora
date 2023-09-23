@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +12,7 @@ import '../../../../core/presentation/widgets/about_dialog.dart';
 import '../../../../core/presentation/widgets/kofi_button.dart';
 import '../../../../generated/l10n.dart';
 import '../../data/providers/analytics_events.dart';
+import '../../routing/app_router.gr.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -71,6 +74,14 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
             const KofiButton(),
+            if (kDebugMode)
+              ListTile(
+                leading: const Icon(Icons.developer_mode),
+                title: const Text('Dev options'),
+                onTap: () {
+                  context.pushRoute(DevRoute());
+                },
+              ),
           ],
         ),
       );
