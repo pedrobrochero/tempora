@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 import '../../domain/entities/custom_timer.dart';
 import '../../domain/usecases/add_to_timer_count.dart';
@@ -28,6 +29,9 @@ class TimerCubit extends Cubit<TimerState> {
   final CustomTimer timer;
 
   AudioPlayer? player;
+
+  /// The volume before the timer finished.
+  double? volumeBackup;
 
   @visibleForTesting
   final ShowNotification showNotification;
@@ -68,6 +72,13 @@ class TimerCubit extends Cubit<TimerState> {
   void resetTimer() {
     state.ticker?.cancel();
     player?.stop();
+    // TODO(pedrobrochero): Usecase to set the volume.
+    if (volumeBackup != null) {
+      VolumeController().setVolume(
+        volumeBackup!,
+        showSystemUI: false,
+      );
+    }
     emit(state.copyWith(
       ticker: null,
       remainingSeconds: state.duration.inSeconds,
@@ -89,6 +100,12 @@ class TimerCubit extends Cubit<TimerState> {
     (await playTimerSound(player)).fold(
       (l) => null,
       (r) => player = r,
+    );
+    // TODO(pedrobrochero): Usecase to set the volume.
+    volumeBackup = await VolumeController().getVolume();
+    VolumeController().setVolume(
+      1,
+      showSystemUI: false,
     );
   }
 

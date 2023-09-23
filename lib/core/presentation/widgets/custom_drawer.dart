@@ -79,7 +79,7 @@ class CustomDrawer extends StatelessWidget {
                 leading: const Icon(Icons.developer_mode),
                 title: const Text('Dev options'),
                 onTap: () {
-                  context.pushRoute(DevRoute());
+                  context.pushRoute(const DevRoute());
                 },
               ),
           ],

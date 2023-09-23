@@ -20,11 +20,9 @@ abstract class $AppRouter extends _i3.RootStackRouter {
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
     DevRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<DevRouteArgs>(orElse: () => const DevRouteArgs());
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i1.DevPage(key: args.key),
+        child: const _i1.DevPage(),
       );
     },
     TimerListRoute.name: (routeData) {
@@ -40,31 +38,16 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 
 /// generated route for
 /// [_i1.DevPage]
-class DevRoute extends _i3.PageRouteInfo<DevRouteArgs> {
-  DevRoute({
-    _i4.Key? key,
-    List<_i3.PageRouteInfo>? children,
-  }) : super(
+class DevRoute extends _i3.PageRouteInfo<void> {
+  const DevRoute({List<_i3.PageRouteInfo>? children})
+      : super(
           DevRoute.name,
-          args: DevRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'DevRoute';
 
-  static const _i3.PageInfo<DevRouteArgs> page =
-      _i3.PageInfo<DevRouteArgs>(name);
-}
-
-class DevRouteArgs {
-  const DevRouteArgs({this.key});
-
-  final _i4.Key? key;
-
-  @override
-  String toString() {
-    return 'DevRouteArgs{key: $key}';
-  }
+  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
 }
 
 /// generated route for
