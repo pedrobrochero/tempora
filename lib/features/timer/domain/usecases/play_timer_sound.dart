@@ -18,6 +18,16 @@ class PlayTimerSound implements UseCase<AudioPlayer, AudioPlayer?> {
         AssetSource('sounds/islandy_loop.mp3'),
       );
       await player.setReleaseMode(ReleaseMode.loop);
+      await player.setAudioContext(
+        const AudioContext(
+          android: AudioContextAndroid(
+            contentType: AndroidContentType.sonification,
+            usageType: AndroidUsageType.alarm,
+            audioFocus: AndroidAudioFocus.gainTransient,
+            isSpeakerphoneOn: true,
+          ),
+        ),
+      );
     }
     await player.resume();
     return Right(player);

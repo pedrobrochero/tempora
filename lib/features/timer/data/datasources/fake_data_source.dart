@@ -1,8 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:faker/faker.dart';
 
 import '../../domain/entities/custom_timer.dart';
-
-// TODO(pedrobrochero): Remove this faker file.
 
 CustomTimer get fakeTimer => CustomTimer(
       id: faker.guid.guid(),

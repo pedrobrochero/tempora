@@ -7,7 +7,6 @@ This is a multitimer mobile app.
 - Obfuscate and upload native symbols to store.
 
 ### Others
-- Control timer-ended sound from MediaPlayer.
 - Clear code TODOs.
 - Login and sync timers.
 - No-ads version.
