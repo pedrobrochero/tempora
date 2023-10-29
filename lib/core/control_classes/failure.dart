@@ -1,7 +1,6 @@
 import '../data/providers/crashlytics_provider.dart';
 import '../misc/logging/logging.dart';
 
-// TODO(pedrobrochero): Make this constructors const.
 /// [Failure] are handled exceptions, define inside features, not here.
 abstract class Failure with Logging {
   Failure() {

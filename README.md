@@ -1,8 +1,6 @@
 # Tempora
 This is a multitimer mobile app.
 
-## TODOs
-
 ### MVP
 - Obfuscate and upload native symbols to store.
 
