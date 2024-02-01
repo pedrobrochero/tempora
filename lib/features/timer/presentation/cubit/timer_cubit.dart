@@ -69,7 +69,7 @@ class TimerCubit extends Cubit<TimerState> {
   }
 
   /// Resets the timer to its initial state.
-  void resetTimer() {
+  Future<void> resetTimer() async {
     state.ticker?.cancel();
     player?.stop();
     // TODO(pedrobrochero): Usecase to set the volume.

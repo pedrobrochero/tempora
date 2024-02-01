@@ -152,7 +152,8 @@ class _StartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
+          await context.read<TimerCubit>().resetTimer();
           context.read<TimerCubit>().startTimer();
           context.read<ForegroundServiceCubit>().addTimer(timer.id);
         },
