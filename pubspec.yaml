@@ -33,8 +33,10 @@ dependencies:
   in_app_review: ^2.0.6
   intl: ^0.18.0
   json_annotation: ^4.8.1
+  move_to_background: ^1.0.2
   package_info_plus: ^4.0.1
   path: ^1.8.3
+  screen_state: ^3.0.1
   sqflite: ^2.2.8+4
   url_launcher: ^6.1.11
   uuid: ^3.0.7

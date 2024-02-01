@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:move_to_background/move_to_background.dart';
+import 'package:screen_state/screen_state.dart';
 
 import '../../../../core/control_classes/status.dart';
 import '../../../../core/dependency_injection.dart';
@@ -16,13 +20,45 @@ import '../widgets/timer_form.dart';
 import '../widgets/timer_tile.dart';
 
 @RoutePage()
-class TimerListPage extends StatelessWidget {
-  TimerListPage({Key? key}) : super(key: key);
+class TimerListPage extends StatefulWidget {
+  const TimerListPage({Key? key}) : super(key: key);
 
+  @override
+  State<TimerListPage> createState() => _TimerListPageState();
+}
+
+class _TimerListPageState extends State<TimerListPage>
+    with WidgetsBindingObserver {
   // It's normal for this bloc to never be closed, as this is a one page
   // app. This is done because the timersCubits are created, closed and
   // stored in this cubit, to avoid mess.
   final timerListCubit = sl<TimerListCubit>();
+
+  /// The subscription to the screen state stream.
+  StreamSubscription<ScreenStateEvent>? screenSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addObserver(this);
+    screenSubscription = Screen().screenStateStream?.listen(
+      (event) {
+        if (event == ScreenStateEvent.SCREEN_OFF) {
+          MoveToBackground.moveTaskToBack();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // WidgetsBinding.instance.removeObserver(this);
+    screenSubscription?.cancel();
+    super.dispose();
+  }
+
+  // TODO(pedrobrochero): On resume app lifecycle, check if some timer is
+  // finished and scroll to it.
 
   @override
   Widget build(BuildContext context) => BlocProvider.value(
